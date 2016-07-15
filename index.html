@@ -19,9 +19,21 @@
       <h3>
 <a id="about" class="anchor" href="#about" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>About</h3>
 
-<p>Ohm is a parser generator. You can use it to parse custom file formats or quickly build parsers, interpreters, and compilers for programming languages. It consists of two parts: a <em>library</em> and a <em>domain-specific language</em>. The Ohm language is based on parsing expression grammars (<a href="https://en.wikipedia.org/wiki/Parsing_expression_grammar">PEGs</a>), which are a formal way of describing syntax, similar to regular expressions and context-free grammars. The Ohm library provides a JavaScript interface (known as Ohm/JS) for creating parsers, interpreters, and more from the grammars you write.</p>
+<p>Ohm is a parser generator consisting of a library and a domain-specific language.
+You can use it to parse custom file formats or quickly build parsers, interpreters, and compilers for programming languages. The <em>Ohm language</em> is based on <a href="http://en.wikipedia.org/wiki/Parsing_expression_grammar">parsing expression grammars</a>
+(PEGs), which are a formal way of describing syntax, similar to regular expressions and context-free
+grammars. The <em>Ohm library</em> provides a JavaScript interface (known as Ohm/JS) for creating parsers,
+interpreters, and more from the grammars you write.</p>
 
-<p>One thing that distinguishes Ohm from other parser generators is that it completely separates grammars from semantic actions. In Ohm, a grammar defines a language, and semantic actions specify what to do with valid inputs in that language. Semantic actions are written in the host language -- e.g., for Ohm/JS, the host language is JavaScript. Ohm grammars, on the other hand, work without modification in any host language.</p>
+<p>Like its older sibling <a href="http://tinlizzie.org/ometa/">OMeta</a>, Ohm supports object-oriented grammar
+extension. One thing that distinguishes Ohm from other parsing tools is that it completely
+separates grammars from semantic actions. In Ohm, a grammar defines a language, and semantic
+actions specify what to do with valid inputs in that language. Semantic actions are written in the
+<em>host language</em> -- e.g., for Ohm/JS, the host language is JavaScript. Ohm grammars, on the other
+hand, work without modification in any host language. This separation improves modularity, and
+makes both grammars and semantic actions easier to read and understand. Currently, JavaScript is
+the only host language, but as the API stabilizes, we hope to have implementations for other
+languages.</p>
 
 <h3>
 <a id="publications" class="anchor" href="#publications" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Publications</h3>

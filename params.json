@@ -1,6 +1,6 @@
 {
   "name": "Ohm",
-  "tagline": "A parser generator ",
+  "tagline": "A library and language for building parsers, interpreters, compilers, etc.",
   "body": "### About\r\n\r\nOhm is a parser generator. You can use it to parse custom file formats or quickly build parsers, interpreters, and compilers for programming languages. It consists of two parts: a _library_ and a _domain-specific language_. The Ohm language is based on parsing expression grammars ([PEGs](https://en.wikipedia.org/wiki/Parsing_expression_grammar)), which are a formal way of describing syntax, similar to regular expressions and context-free grammars. The Ohm library provides a JavaScript interface (known as Ohm/JS) for creating parsers, interpreters, and more from the grammars you write.\r\n\r\nOne thing that distinguishes Ohm from other parser generators is that it completely separates grammars from semantic actions. In Ohm, a grammar defines a language, and semantic actions specify what to do with valid inputs in that language. Semantic actions are written in the host language -- e.g., for Ohm/JS, the host language is JavaScript. Ohm grammars, on the other hand, work without modification in any host language.\r\n\r\n### Publications\r\n\r\n* [Language Hacking in a Live Programming Environment](http://tinlizzie.org/~awarth/live2016/) (to be presented at [LIVE'16](http://2016.ecoop.org/track/LIVE-2016))",
   "note": "Don't delete this file! It's used internally to help with page regeneration."
 }

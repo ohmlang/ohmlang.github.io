@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <title>Language Hacking in a Live Programming Environment</title>
+  
+  <link rel="stylesheet" href="./css/normalize.css" type="text/css">
+  <link rel="stylesheet" href="./css/style.css" type="text/css">
+</head>
+
+<body>
+<div id="content">
+<h1 id="language-hacking-in-a-live-programming-environment">Language Hacking in a Live Programming Environment</h1>
+<div id="authorship">
+  <div class="authors">Patrick Dubroy, Saketh Kasibatla, Meixian Li, Marko Röder, and Alex Warth</div>
+  <div class="affiliation">HARC / Y Combinator Research</div>
+</div>
+
+<div style="width: 75%; margin: 0 auto 24px; text-align: justify;">
+We are interested in improving the experience of prototyping and implementing programming languages.
+In this paper, we outline some ways in which principles from live programming could make the life
+of the “language hacker” easier, and introduce novel visualizations that manifest the normally
+opaque semantics of parsing and semantic actions. We demonstrate the application of these ideas in
+the Ohm Editor, a tool we are building to support our new
+<a href="https://github.com/cdglabs/ohm">language implementation framework</a>, but we believe they are
+equally applicable to other language-hacking tools.
+</div>
+
+<h2 id="1-introduction">1. Introduction</h2>
+<p>Live programming environments [<a href="http://dspace.mit.edu/handle/1721.1/61549">Hancock 2003</a>] enable
+programmers to better understand their code (even while they are writing or modifying it), catch and
+fix bugs earlier, and more. Much of this power comes from giving programmers support for:</p>
+<ul>
+<li><strong>visualizing the execution</strong> of their programs
+[<a href="http://worrydream.com/LearnableProgramming/">Victor 2012b</a>],</li>
+<li><strong>continuous feedback</strong> to see the effects of their changes instantly
+[<a href="https://www.youtube.com/watch?v=YLrdhFEAiqo">McDirmid 2015</a>], and</li>
+<li>writing code in the context of example inputs, to <strong>make programming more concrete</strong>
+[<a href="https://vimeo.com/36579366">Victor 2012a</a>].</li>
+</ul>
+<p>We are interested in bringing the benefits of live programming to the domain of programming
+language prototyping and implementation. In this paper, we outline some ways in which the principles
+above could make the life of the “language hacker” easier. We demonstrate the application of
+these principles in the Ohm Editor, a tool we are building to support our new
+<a href="https://github.com/cdglabs/ohm">language implementation framework</a>.</p>
+<p><strong>Ohm at a glance.</strong> Ohm builds on parsing expression grammars (PEGs)
+[<a href="http://www.brynosaurus.com/pub/lang/peg.pdf">Ford 2004</a>] to give language designers and
+implementers a convenient way to prototype programming languages, i.e., write parsers, interpreters,
+compilers, etc. An Ohm <em>grammar</em> defines the syntax of a language, while <em>semantic actions</em> specify
+what to do with them. Unlike most other grammar-based tools — e.g., OMeta
+[<a href="http://www.tinlizzie.org/~awarth/papers/dls07.pdf">Warth and Piumarta 2007</a>] and Yacc
+[<a href="http://dinosaur.compilertools.net/yacc/">Johnson 1975</a>] — Ohm completely separates grammars and
+semantic actions. This separation improves modularity, and makes both grammars and semantic actions
+easier to read and understand.</p>
+<p>In grammar-based tools like Ohm and Yacc, the programmer writes grammars as well as semantic
+actions. While these are distinct activities that should be supported in different ways, the live
+programming principles above apply to both of them.</p>
+<p>The rest of this paper is organized as follows. Section 2 gives an overview of the Ohm Editor.
+Sections 3 and 4 describe how we applied principles from live programming to improve the experience
+of writing grammars and semantic actions, respectively. Section 5 presents some ongoing work
+that we plan to present at the LIVE workshop, and Section 6 concludes.</p>
+<h2 id="2-overview-of-the-ohm-editor">2. Overview of the Ohm Editor</h2>
+<p>Below is a screenshot of the Ohm Editor, with a sample grammar of arithmetic expressions:</p>
+<p><img src="media/editor-overview.png" width="768"></p>
+<p>The editor consists of three panes:</p>
+<ul>
+<li>the <strong>grammar editor</strong> (top left),</li>
+<li>the list of <strong>examples</strong> (top right) that serve as test cases for developing and debugging the
+grammar, and</li>
+<li>the <strong>visualizer</strong> (bottom half), which shows how the selected example was parsed.</li>
+</ul>
+<p>In the following two sections, we show how these components come together to provide a powerful
+environment for writing grammars and semantic actions.</p>
+<h2 id="3-live-editing-grammars">3. Live Editing Grammars</h2>
+<p>Both the grammar pane and the examples pane are “live” and offer continuous feedback to the user as
+they type. In this section, we will describe this feedback and how it helps the user develop,
+debug, and understand grammars.</p>
+<h3 id="editing-examples">Editing Examples</h3>
+<p>As the user types in the example pane, the Ohm Editor continuously tries to match the example
+against the grammar. If it does not match the example successfully, a portion of the text is
+<span style="border-bottom: 1px dashed #C7254E;">underlined in red</span> to indicate where the
+error occurred. This is deliberately subtle so as to avoid interrupting the user while they are
+still typing. Once the user stops typing, if the text still fails to match, an error is shown after
+a brief delay:</p>
+<p><img src="media/example-error.png" alt="Screenshot of error in input editor" width="768"></p>
+<p>If the example matches successfully, the resulting <em>concrete syntax tree</em> (CST) is shown in the
+visualizer pane. The visualizer is described in detail below.</p>
+<h3 id="editing-grammars">Editing Grammars</h3>
+<p>When editing a grammar, there are a few forms of feedback that are relevant. First, it is useful to
+know whether the examples still match the grammar. Each example in the examples pane has a green or
+red indicator that shows whether or not it is accepted by the grammar:</p>
+<p><img src="media/example-indicators.png" width="768"></p>
+<p>As the user types, the editor continously tries to match each example against the current version
+of the grammar, appropriately updating the indicators either red or green. In this way, the Ohm
+Editor supports a basic form of “example-centric programming”, where the grammar can be developed
+in the context of a number of concrete examples. Rather than beginning with a grammar, the
+programmer may choose to start by writing one or more examples, and then develop the grammar to
+work with these examples.</p>
+<p>Another form of feedback is provided when editing grammars: as the user types, the editor
+continuously checks that the grammar itself is syntactically valid. Just like in the example editor,
+any error is initially indicated with a dashed red line and, after a brief delay, a complete error
+message is shown:</p>
+<p><img src="media/grammar-error.png" alt="Screenshot of error in input editor" width="768"></p>
+<h3 id="visualizer">Visualizer</h3>
+<p>When the selected example is accepted by the grammar, the Ohm Editor’s visualizer displays a
+<em>concrete syntax tree</em> (CST) that represents the syntactic structure of the input, as defined by
+the grammar. Below is the CST of the input <code>3 + (4 * 5)</code>:</p>
+<p><img src="media/example-parse-tree.png" width="442"></p>
+<p>This visualization is a variation on an <em>icicle plot</em>
+[<a href="http://www.jstor.org/stable/2685881?seq=1">Kruskal and Landwehr 1983</a>]. It is also similar to a
+<a href="http://www.brendangregg.com/flamegraphs.html">flame graph</a>, which is often used in software
+profilers.</p>
+<p>Nodes representing successful rule applications (e.g., <code>Exp</code> and <code>AddExp</code>) are depicted by
+<span style="background-color: #efefef; padding: 0 4px; display: inline-block;">gray
+rectangles</span> and labeled with the name of the associated rule. Nodes that represent
+successfully-matched string literals, e.g., <code>&quot;+&quot;</code>,  are shown <span style="color: SeaGreen;">in
+green</span>.</p>
+<p>This visualization shares two important properties with typical icicle plots:</p>
+<ul>
+<li>A node’s children appear immediately beneath it. In this example, the <cstnode>Exp</cstnode> node
+at the top level has a single child: an <cstnode>AddExp</cstnode> node.</li>
+<li>The width of the node carries information. In this case, it shows how much of the input text was
+consumed by that node. More specifically, the text consumed by a node appears directly above it.</li>
+</ul>
+<p>When the cursor is over a node, the portion of text consumed by that node is highlighted:</p>
+<video controls>
+  <source src="media/consumed-input.mp4" type="video/mp4" />
+</video>
+
+<p>Our visualization differs from a standard icicle plot in at least two ways:</p>
+<ul>
+<li>The horizontal position of a node is important — it always lines up with the text consumed by
+that node.</li>
+<li>The width of the nodes is <strong>not</strong> determined by a linear scale; their relative widths are not
+comparable.</li>
+</ul>
+<p>The reason for the latter point is that in order to keep the node labels readable, we ensure that
+each node is always at least as wide as its label. If necessary, we increase the letter spacing of
+the consumed input text to maintain the invariant that the text consumed by a node always appears
+directly above the node.</p>
+<p>Since parse trees can get quite large, we enable the user to restrict the amount of information on screen by
+collapsing the children of some nodes. 
+A <span style="background-color: #efefef; padding: 0 4px; border-bottom: 1px solid #bbb">dark gray bottom
+border</span> — as in the <cstnode style="border-bottom: 1px solid #bbb;">number</cstnode> nodes in this
+example — indicate collapsed nodes. The user can collapse and expand any node by clicking on it:</p>
+<video controls>
+  <source src="media/showing-hiding-nodes.mp4" type="video/mp4" />
+</video>
+
+<h4 id="visualizing-failed-parses">Visualizing Failed Parses</h4>
+<p>When an input fails to match, it does not produce a parse tree. However, it is still helpful
+to give the programmer some insight into why the parse failed. For this purpose, our visualizer
+supports a “show failures” option. Here is an example of parsing the invalid input <code>90% * 1000</code>:</p>
+<p><img src="media/show-failures.png" width="442"></p>
+<p>In this mode, the visualization has the same structure as before: successful rule applications are
+gray, and align with the input that they consumed. But this structure is augmented with information
+about failed expressions, which are shown in <span style="color: #d44950">red</span>. Note that in
+practice, most parses (successful or not) consist of both successfully-matched expressions and
+failures.</p>
+<p>To clarify the meaning of our “show failures” visualization, the image below shows the
+correspondence between the children of the <cstnode>AddExp</cstnode> node and their definitions in
+the arithmetic grammar. Our user interface lets the programmer see these connections by highlighting
+the corresponding definition in the grammar pane (not shown) when the mouse hovers over one of the
+nodes in the visualization.</p>
+<p><img src="media/show-failures-annotated.png" width="768">
+<!-- <img src="media/show-failures-hover.png" width="768"> --></p>
+<p>So in the process of recognizing the input as an <cstnode>AddExp</cstnode>, we can see that the
+parser attempts the folowing:</p>
+<ol>
+<li><cstnode>AddExp<caselabel>plus</caselabel></cstnode>, which fails;</li>
+<li><cstnode>AddExp<caselabel>minus</caselabel></cstnode>, which also fails; and finally</li>
+<li><cstnode>MulExp</cstnode>, which succeeds, consuming the substring <code>90</code> from the input stream.</li>
+</ol>
+<p>When read from top to bottom and left to right, our “show failures” visualization shows each step
+that the grammar took in recognizing (or attempting to recognize) the input. Essentially, it
+“unrolls” the entire computation into a single, browseable structure. Unlike a stepping debugger,
+this visualization abstracts over time — it is one step higher on the ladder of abstraction
+[<a href="http://worrydream.com/LadderOfAbstraction/">Victor 2011</a>].</p>
+<h2 id="4-live-editing-semantic-actions">4. Live Editing Semantic Actions</h2>
+<p>In Ohm, a grammar determines the set of all valid inputs in a language, but it does not specify
+what to do with them. To do something other than recognize valid inputs, e.g., to generate an
+abstract syntax tree or interpret a program, the programmer must first create a <em>semantics</em> for
+that grammar. A semantics is a collection of operations and attributes for a given grammar.</p>
+<p>This section outlines the Ohm Editor’s support for creating and editing operations and attributes.
+Our running example will be an “eval” operation that computes the value of an arithmetic expression.</p>
+<h3 id="example-driven-development">Example-Driven Development</h3>
+<p>When the programmer creates an operation, they must specify how it behaves for each rule in the
+grammar. This is done by writing semantic actions. To make the task of writing semantic actions
+less tedious and abstract, and to shorten the feedback loop between the programmer and the computer,
+the Ohm Editor allows semantic actions to be written in the context of an example. The following
+sections illustrate how the Ohm Editor leverages examples to improve the experience of writing
+semantic actions.</p>
+<h3 id="writing-semantic-actions-top-down">Writing Semantic Actions Top-Down</h3>
+<p>Ohm evaluates operations in a top-down fashion. When the user adds a new operation to a semantics,
+it starts out without any semantic actions. In the video below, we see that the Ohm Editor helpfully
+points out what (if any) semantic actions still need to be specified before it can compute a result
+for the current input. This is similar to the “bookkeeping” provided by the
+<a href="https://coq.inria.fr/">Coq proof assistant</a>.</p>
+<video controls>
+  <source src="media/top-down-with-next-steps.mp4" type="video/mp4" />
+</video>
+
+<p>Here, the programmer adds an operation called “eval” and the Ohm Editor points out that the first
+CST node that is missing a semantic action, from a top-down perspective,
+is <cstnode>AddExp<caselabel>plus</caselabel></cstnode>.</p>
+<p>The programmer then adds the semantic action for <cstnode>AddExp<caselabel>plus</caselabel></cstnode>. This is
+done by giving names to the sub-expressions corresponding to the operands and specifying how to compute the result
+recursively: to evaluate a “plus” node, first evaluate each of its operands, then return the sum of
+the results. Note that this semantic action applies to all <cstnode>AddExp<caselabel>plus</caselabel></cstnode>
+nodes, not just the one in this example.</p>
+<p>At this point, the Ohm Editor attempts to compute the value of the “eval” operation for the current
+input and finds the next set of semantic actions that are missing: <cstnode>number</cstnode>
+and <cstnode>MulExp<caselabel>times</caselabel></cstnode>. The following video shows what happens when the
+programmer adds the missing semantic actions.</p>
+<video controls>
+  <source src="media/top-down-with-next-steps-cont.mp4" type="video/mp4" />
+</video>
+
+<p>Note that the value of the “eval” operation is shown immediately for each node, as an extension of
+the visualization described the previous section.</p>
+<h3 id="improving-top-down-development-by-zooming">Improving Top-Down Development by Zooming</h3>
+<p>Writing semantic actions in a top-down style, as shown in the previous section, often requires the
+programmer to write several semantic actions before they can finally see a result. This goes against
+the principle of continuous feedback; it would be better if the programmer could see the effects of
+the code that they are writing (e.g., the semantic action for <cstnode>AddExp<caselabel>plus</caselabel></cstnode>)
+instantly.</p>
+<p>To make writing semantic actions a more reactive experience, the Ohm Editor supports a “zoom” feature that enables
+the programmer to focus on a sub-expression, write the semantic actions that are required to compute
+its value, and then zoom out to think about the bigger picture:</p>
+<video controls>
+  <source src="media/top-down-with-zoom.mp4" type="video/mp4" />
+</video>
+
+<p>Note that after the programmer zooms out, the operation’s value for the sub-expression <code>2 * 3</code> is
+shown in the visualization of the top-level expression. This provides a useful context for
+writing the semantic action for <cstnode>AddExp<caselabel>plus</caselabel></cstnode> (not shown).</p>
+<p>Also note that the programmer in this video had to write two semantic actions (the ones
+for <cstnode>MulExp<caselabel>times</caselabel></cstnode> and <cstnode>number</cstnode>) before any
+results were shown; this falls short of the live programming experience we are after.
+One way to get more immediate feedback in this example is to first zoom in on a <cstnode>number</cstnode> and
+write its semantic action, then zoom in on its parent <cstnode>MulExp<caselabel>times</caselabel></cstnode> and
+write that semantic action. The next section provides a different solution to this problem.</p>
+<h3 id="writing-semantic-actions-bottom-up">Writing Semantic Actions Bottom-Up</h3>
+<p>When the programmer modifies or adds a semantic action through a particular CST node, the value of
+that node is automatically recomputed. The Ohm Editor also enables programmers to force the
+evaluation of an operation, for any node that has an associated semantic action, at any time.</p>
+<p>Combined, these features enable programmers to write semantic actions in a bottom-up fashion:</p>
+<video controls>
+  <source src="media/bottom-up.mp4" type="video/mp4" />
+</video>
+
+<p>This bottom-up development style has distinct advantages from a live programming perspective, as it:</p>
+<ul>
+<li><strong>Provides a more helpful context for writing semantic actions</strong>. For example, when the programmer writes
+the semantic action for the <cstnode>MulExp<caselabel>times</caselabel></cstnode> node, they can see the
+results of the semantic actions on the child nodes. This makes programming more concrete.</li>
+<li><strong>Gives the programmer immediate feedback</strong>, i.e.,  they get to see the value that is produced by a semantic
+action immediately after writing it. This gives the programmer confidence that their code is correct, and when it
+isn’t, enables them to catch and fix bugs right away.</li>
+</ul>
+<h3 id="visualizing-intermediate-results">Visualizing Intermediate Results</h3>
+<div style="display: inline-block; margin-bottom: 15px;">
+<video controls class="float-right" style="width: 50%">
+  <source src="media/visualizing-every-step-of-computation.mp4" type="video/mp4" />
+</video>
+
+<p>
+At any point during the development of an operation, the Ohm Editor can serve as a “playground”
+that enables the programmer to interactively modify the input and see immediately how their changes
+affect the result. Our interface naturally supports incremental development: if the programmer
+enters an input that is not yet supported by the operation, they will immediately see what semantic
+actions are missing and may add those right then and there (in the appropriate context) if desired.
+</p>
+
+<p>
+The ability to visualize intermediate results is helpful for understanding and debugging an
+operation. It enables the programmer to see how the “ingredients are combined” to make a “delicious
+soufflé” [<a href="http://worrydream.com/LearnableProgramming/#flow">Victor 2012b</a>]. Our visualization of
+intermediate results was inspired in part by a prototype attribute grammar editor that was done by
+Akira Sasaki while he was a visitor at the Communications Design Group (CDG), and Glen Chiacchieri’s
+<a href="http://glench.com/LegibleMathematics/">Legible Mathematics</a>.
+</p>
+</div>
+
+<h2 id="5-ongoing-work">5. Ongoing Work</h2>
+<p>This section describes some ongoing work that we plan to demonstrate at the LIVE workshop.</p>
+<h3 id="-mad-libs-based-automatic-input-generation">“Mad Libs”-based Automatic Input Generation</h3>
+<video controls class="float-right" style="width: 50%">
+  <source src="media/madlibs.mp4" type="video/mp4" />
+</video>
+
+<p>We are currently working on extending the Ohm Editor with support for automatically generating
+inputs that are valid according to a user-defined grammar. We hope this will give the programmer a
+better understanding of the language they are working on (even while editing the grammar) and
+enable them to catch bugs earlier than with traditional tools.</p>
+<p>Our prototype leverages a set of user-supplied examples (see
+<a href="#3-live-editing-grammars">Section 3</a>) to generate new inputs with a
+&ldquo;<a href="https://en.wikipedia.org/wiki/Mad_Libs">Mad Libs</a>&rdquo;-style algorithm. As an example,
+consider the problem of generating a valid input for our arithmetic
+grammar’s <cstnode>MulExp<caselabel>times</caselabel></cstnode> rule:</p>
+<pre><code>  MulExp
+    = MulExp &quot;*&quot; PriExp  -- times
+    | ...
+</code></pre><p>Here is the Mad Libs equivalent of this rule:</p>
+<div class="clearfix"><!-- Break out of float --></div>
+
+<p><img src="media/madlibs-white.png" width="768"></p>
+<p>To generate a valid input for <cstnode>MulExp<caselabel>times</caselabel></cstnode>, all we need is
+a valid input for <cstnode>MulExp</cstnode>, and a valid input for <cstnode>PriExp</cstnode>. The
+main insight of our algorithm is that there is no need to generate strings for these sub-expressions
+when we can simply “mine” them from the set of user-supplied examples. This leads to more
+“natural-looking” examples than those produced by purely generative algorithms, e.g., in
+Petit Parser [<a href="http://scg.unibe.ch/archive/papers/Reng10cDynamicGrammars.pdf">Renggli et al. 2010</a>].</p>
+<p>Note that the user does not have to enter examples for each of these rules explicitly. A single
+user-supplied example, such as <code>1 * 2 + 3</code>, actually contains several sub-examples. These
+sub-examples are determined by the decomposition of the example according to the grammar:</p>
+<ul>
+<li><code>1 * 2 + 3</code> is an <cstnode>Exp</cstnode>, an <cstnode>AddExp</cstnode>, and
+an <cstnode>AddExp<caselabel>plus</caselabel></cstnode></li>
+<li><code>1 * 2</code> is an <cstnode>AddExp</cstnode>, a <cstnode>MulExp</cstnode>, and
+a <cstnode>MulExp<caselabel>times</caselabel></cstnode></li>
+<li><code>1</code> is a <cstnode>MulExp</cstnode>, a <cstnode>PriExp</cstnode>,
+a <cstnode>number</cstnode>, and a <cstnode>digit</cstnode></li>
+<li><code>2</code> is a <cstnode>PriExp</cstnode>, a <cstnode>Number</cstnode>, and a <cstnode>digit</cstnode></li>
+<li><code>3</code> is a <cstnode>MulExp</cstnode>, a <cstnode>PriExp</cstnode>, a <cstnode>number</cstnode>, and
+a <cstnode>digit</cstnode></li>
+</ul>
+<p>Fueled by this (single) user-supplied example, our Mad Libs algorithm can generate any of the
+following inputs for <cstnode>MulExp<caselabel>times</caselabel></cstnode>:</p>
+<table>
+<thead>
+<tr>
+<th><img src="media/mulexp-priexp.png"></th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><code>1</code> <code>*</code> <code>1</code></td>
+<td><code>1</code> <code>*</code> <code>2</code></td>
+<td><code>1</code> <code>*</code> <code>3</code></td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>3</code> <code>*</code> <code>1</code></td>
+<td><code>3</code> <code>*</code> <code>2</code></td>
+<td><code>3</code> <code>*</code> <code>3</code></td>
+</tr>
+<tr>
+<td>1 * 2</td>
+<td><code>1 * 2</code> <code>*</code> <code>1</code></td>
+<td><code>1 * 2</code> <code>*</code> <code>2</code></td>
+<td><code>1 * 2</code> <code>*</code> <code>3</code></td>
+</tr>
+</tbody>
+</table>
+<p>The number of inputs our algorithm is able to generate increases exponentially with the number of
+user-supplied examples. And in cases where longer input strings are desired, we can feed
+automatically-generated inputs back into the algorithm.</p>
+<h3 id="a-more-scalable-visualization">A More Scalable Visualization</h3>
+<p>While the Ohm Editor’s current visualization (described in
+<a href="#visualizer">Section 3</a>) works well for small inputs, it does not scale well to
+larger inputs that span multiple lines. Below is a prototype of a new visualization that was
+designed for scalability:</p>
+<video controls>
+  <source src="media/sakeths-viz.mp4" type="video/mp4" />
+</video>
+
+<p>This new visualization preserves the structure of the input (e.g., its indentation) to make it
+easier for the programmer to understand the connection between the text and its decomposition.
+Colored lines mark the boundaries of CST nodes in the text of the input. If a node spans more than
+one line of text, its children’s annotations are drawn vertically to the left of the input.
+Otherwise, the node’s annotation is drawn horizontally below its text.  (These horizontal
+annotations are only displayed for the line that has focus.) The hue of each line is determined by
+the position of its associated rule in the grammar, allowing the user to quickly recognize patterns
+in the decomposition of the input.</p>
+<h2 id="6-conclusions-and-future-work">6. Conclusions and Future Work</h2>
+<p>We have outlined several ways in which principles from live programming could make the life of the
+“language hacker” easier. We have also demonstrated the application of these principles in the Ohm
+Editor, a tool we are building to support our new language implementation framework. We believe
+these ideas are equally applicable to other grammar-based language development tools.</p>
+<p>While we are encouraged by the results presented in this paper, there is still much work to be
+done. For example, when the programmer adds or modifies a semantic action through a particular CST
+node, the Ohm editor automatically evaluates that semantic action <em>for that particular node</em>. It
+may be more helpful to instead evaluate that semantic action for <em>all</em> nodes of that type. This
+should reduce the number of “clunky” interactions in our UI (e.g., the manual “force evaluation”
+feature) and present as much potentially useful information to the programmer as possible, by
+default.</p>
+<p>We also plan to explore different ways to display the results of semantic actions. Displaying
+them as strings inside CST nodes, as we do now, is clearly not appropriate for many applications.
+It should be possible for the programmer to specify custom “result visualizations” for their
+operations and attributes, when desired.</p>
+<!--
+* provide a "global view" of the semantic actions for an operation, perhaps overlayed on
+  top of the grammar. (this would look like OMeta, without sacrificing Ohm's modularity.)
+-->
+<h2 id="7-acknowledgements">7. Acknowledgements</h2>
+<p>The authors would like to thank Akira Sasaki, Aran Lunzer, Bret Victor, Glen Chiacchieri,
+Jonathan Edwards, and Yoshiki Ohshima for helpful ideas and feedback on this work and an earlier
+draft of this paper.</p>
+<!--
+## Related Work
+
+- [Parsing By Example](http://www.inf.usi.ch/faculty/lanza/Downloads/Kobe05a.pdf)
+- Gramada - Immediate Feedback for the Development of Domain-Specific Languages ([Patrick Rein's](http://hpi.uni-potsdam.de/hirschfeld/people/rein/index.html) Master's Thesis)
+-->
+
+</div>
+</body>
+</html>

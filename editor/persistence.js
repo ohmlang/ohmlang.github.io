@@ -9,7 +9,11 @@
       server: initServer
     };
   } else {
-    checkForServerGrammars(initServer, initLocal);
+    try {
+      checkForServerGrammars(initServer, initLocal);
+    } catch (e) {
+      initLocal(root.ohmEditor, root.CheckedEmitter, root.domUtil, root.saveAs);
+    }
   }
 
   function checkForServerGrammars(success, fail) {
@@ -121,9 +125,7 @@
     }
 
     getFromURL('../grammars/' + grammar, function(src) {
-      // TODO: should be ohmEditor.once(...)
-      ohmEditor.addListener('change:grammar', function(source) {
-        ohmEditor.removeCurrentListener();
+      ohmEditor.once('change:grammar', function(_) {
         $('#saveIndicator').classList.remove('edited');
       });
 

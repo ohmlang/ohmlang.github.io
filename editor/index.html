@@ -33,9 +33,9 @@
       font-style: normal;
       border-radius: 3px;
       padding: 2px 12px 1px 6px;
-      position: fixed;
+      position: absolute;
       top: 8px;
-      right: 50%;
+      right: 0;
     }
     #grammars label {
       font-size: 0.75em;
@@ -132,6 +132,11 @@
       display: flex;
       flex-direction: column;
       flex: 1;
+      overflow: hidden;
+    }
+
+    #grammarContainer {
+      position: relative;
     }
 
     #exampleContainer[hidden] {
@@ -465,6 +470,17 @@
   <div id="topSection">
     <div id="grammarContainer">
       <h2>Grammar</h2>
+      <div id="grammars" hidden>
+        <select id="grammarList" hidden><option value="">[local storage]</option></select>
+        <label id="grammarName" class="unnamed">no file loaded</label>
+        <input id="grammarFile" type="file" accept=".ohm" hidden>
+        <button id="loadGrammar">Load...</button>
+        <button id="saveGrammar">Save...</button>
+        <label id="saveIndicator" hidden>
+          <div id="saved">Saved</div>
+          <div id="edited">Edited</div>
+        </label>
+      </div>
       <div class="flex-fix"><div class="editorWrapper"></div></div>
     </div>
     <div id="topSplitter" class="splitter vertical"></div>
@@ -508,18 +524,6 @@
       <li><input type="checkbox" name="showSpaces"><label>Show spaces</label></li>
       <li><input type="checkbox" name="semantics"><label>Enable semantics</label></li>
     </ul>
-  </div>
-
-  <div id="grammars" hidden>
-    <select id="grammarList" hidden><option value="">[local storage]</option></select>
-    <label id="grammarName" class="unnamed">no file loaded</label>
-    <input id="grammarFile" type="file" accept=".ohm" hidden>
-    <button id="loadGrammar">Load...</button>
-    <button id="saveGrammar">Save...</button>
-    <label id="saveIndicator" hidden>
-      <div id="saved">Saved</div>
-      <div id="edited">Edited</div>
-    </label>
   </div>
 
   <div id="measuringDiv">
@@ -587,7 +591,7 @@ number  (a number)
   <script src="third_party/codemirror-5.11/lib/codemirror.js"></script>
   <script src="third_party/codemirror-5.11/addon/search/search.js"></script>
   <script src="third_party/codemirror-5.11/addon/search/searchcursor.js"></script>
-  <script src="third_party/checked-emitter-1.0.0.js"></script>
+  <script src="third_party/checked-emitter-1.0.1.js"></script>
   <script src="ohmEditor.js"></script>
   <script src="cmUtil.js"></script>
   <script src="domUtil.js"></script>

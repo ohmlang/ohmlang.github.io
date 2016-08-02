@@ -22,7 +22,7 @@
 
   ohmEditor.addListener('parse:grammar', function(matchResult, grammar, error) {
     if (grammar && grammar.defaultStartRule) {
-      semantics = grammar.semantics();
+      semantics = grammar.createSemantics();
       opName = null;
       opArguments = null;
     }
@@ -77,9 +77,8 @@
 
   function nodeKey(cstNode) {
     var ctorName = cstNode.ctorName;
-    var startIdx = cstNode.interval.startIdx;
-    var endIdx = cstNode.interval.endIdx;
-    return ctorName + '_from_' + startIdx + '_to_' + endIdx;
+    var source = cstNode.source;
+    return ctorName + '_from_' + source.startIdx + '_to_' + source.endIdx;
   }
 
   function nodeOpKey(nodeKey, operationName) {

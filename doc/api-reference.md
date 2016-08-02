@@ -48,7 +48,7 @@ Try to match `obj` against `g`, returning a MatchResult. If `optStartRule` is gi
 
 Try to match `obj` against `g`, returning a Trace object. `optNamespace` has the same meaning as in `ohm.grammar`. Trace objects have a `toString()` method, which returns a string which summarizes each parsing step (useful for debugging).
 
-<b><pre class="api">g.semantics() &rarr; Semantics</pre></b>
+<b><pre class="api">g.createSemantics() &rarr; Semantics</pre></b>
 
 Create a new [Semantics](#semantics) object for `g`.
 
@@ -145,7 +145,7 @@ A set of semantic actions for this grammar might look like this:
   // so that we can be sure that the code actually works.
   markscript.transformNextBlock(function(code) {
     return code.replace('...', "return lastName.x().toUpperCase() + ', ' + firstName.x()")
-               .replace('...', "return this.interval.contents;")
+               .replace('...', "return this.sourceString;")
   });
 </script>
 
@@ -158,7 +158,7 @@ var actions = {
 
 <script type="text/markscript">
   // Verify that the action dict actually works.
-  var semantics = g.semantics().addOperation('x', actions);
+  var semantics = g.createSemantics().addOperation('x', actions);
   assert.equal(semantics(g.match('Guy Incognito')).x(), 'INCOGNITO, Guy');
 </script>
 
@@ -196,7 +196,7 @@ An array containing the node's children.
 
 The name of grammar rule that created the node.
 
-<b><pre class="api">n.interval: Interval</pre></b>
+<b><pre class="api">n.source: Interval</pre></b>
 
 Captures the portion of the input that was consumed by the node.
 

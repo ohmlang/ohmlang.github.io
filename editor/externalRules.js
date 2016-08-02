@@ -36,14 +36,14 @@
     };
   }
 
-  var semantics = ohmGrammar.semantics();
+  var semantics = ohmGrammar.createSemantics();
 
   // An attribute for collecting all of the rule names referenced within a grammar.
   // Returns an object whose own properties represent all the referenced rule names.
   semantics.addAttribute('referencedRules', {
     Base_application: function(ident, args) {
       var ans = {};
-      ans[ident.interval.contents] = true;
+      ans[ident.sourceString] = true;
       return extend(ans, args.referencedRules);
     },
     _iter: combineChildResults('referencedRules'),
@@ -58,7 +58,7 @@
   semantics.addAttribute('identifiers', {
     ident: function(_) {
       var ans = {};
-      ans[this.interval.contents] = true;
+      ans[this.sourceString] = true;
       return ans;
     },
     _iter: combineChildResults('identifiers'),
@@ -73,9 +73,9 @@
   function getExternalRules(rulesObj) {
     var ans = {};
     Object.keys(rulesObj).forEach(function(ruleName) {
-      if (ruleName in builtInRules.ruleBodies) {
-        var body = builtInRules.ruleBodies[ruleName];
-        ans[ruleName] = body.interval ? body.interval.contents : body.toString();
+      if (ruleName in builtInRules.rules) {
+        var body = builtInRules.rules[ruleName].body;
+        ans[ruleName] = body.source ? body.source.contents : body.toString();
       }
     });
     return ans;
@@ -148,7 +148,7 @@
   });
 
   ohmEditor.addListener('peek:ruleDefinition', function(ruleName) {
-    if (!ohmEditor.grammar.ruleBodies.hasOwnProperty(ruleName)) {
+    if (!ohmEditor.grammar.rules.hasOwnProperty(ruleName)) {
       var elem = $('#externalRules-' + ruleName);
       if (elem) {
         elem.classList.add('active-definition');

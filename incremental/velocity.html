@@ -1,0 +1,12 @@
+<!doctype html>
+<div>Hye</div>
+<script src="third_party/velocity-animate-1.4.2.js"></script>
+<script>
+  var div = document.querySelector('div');
+  Velocity(div, {tween: [100, 'ease-in-out']}, {
+    duration: 3000,
+    progress: (elements, complete, remaining, start, tweenValue) => {
+      console.log(complete, tweenValue);
+    }
+  })
+</script>

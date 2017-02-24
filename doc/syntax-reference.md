@@ -40,7 +40,7 @@ Here is a full list of the different kinds of parsing expressions supported by O
 
 Matches exactly the characters contained inside the quotation marks.
 
-Special characters (`"`, `\`, and `'`) can be escaped with a backslash -- e.g., `"\""` will match a literal quote character in the input stream. Other valid escape sequences are: `\b` (backspace), `\f` (form feed), `\n` (line feed), `\r` (carriage return), and `\t` (tab).
+Special characters (`"`, `\`, and `'`) can be escaped with a backslash -- e.g., `"\""` will match a literal quote character in the input stream. Other valid escape sequences include: `\b` (backspace), `\f` (form feed), `\n` (line feed), `\r` (carriage return), and `\t` (tab), as well as `\x` followed by 2 hex digits and `\u` followed by 4 hex digits, for matching characters by code point.
 
 ### Rule Application
 
@@ -106,7 +106,7 @@ Matches _expr_ as if in a lexical context. This can be used to prevent whitespac
 
 (See [src/built-in-rules.ohm](../src/built-in-rules.ohm).)
 
-`any`: Matches a single item from the input stream. For a string, it will match any one character.
+`any`: Matches the next character in the input stream, if one exists.
 
 `letter`: Matches a single character which is a letter (either uppercase or lowercase).
 
@@ -123,6 +123,8 @@ Matches _expr_ as if in a lexical context. This can be used to prevent whitespac
 `space`: Matches a single whitespace character (e.g., space, tab, newline, etc.)
 
 `end`: Matches the end of the input stream. Equivalent to `~any`.
+
+<code>caseInsensitive&lt;<i>terminal</i>&gt;</code>: Matches _terminal_, but ignoring any differences in casing (based on the simple, single-character Unicode case mappings). E.g., `caseInsensitive<"ohm">` will match `'Ohm'`, `'OHM'`, etc.
 
 <code>ListOf&lt;<i>elem</i>, <i>sep</i>&gt;</code>: Matches the expression _elem_ zero or more times, separated by something that matches the expression _sep_. E.g., `ListOf<letter, ",">` will match `''`, `'a'`, and `'a, b, c'`.
 

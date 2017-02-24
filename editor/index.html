@@ -65,9 +65,6 @@
     #saveIndicator:not(.edited) #edited {
       height: 0;
     }
-    #saveGrammar {
-      width: 70px;
-    }
 
     #options {
       background-color: white;
@@ -116,7 +113,7 @@
       opacity: 0.4;
       position: absolute;
       top: 0;
-      width: 100%;
+      width: 0;
     }
 
     #exampleContainer {
@@ -360,70 +357,6 @@
       flex: 1;
     }
 
-    #promptScreen {
-      display: none;
-      position: fixed;
-      z-index: 15; /* z-index = 11 is .contexMenu */
-      padding-top: 200px;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      background-color: rgb(0,0,0);
-      background-color: rgba(0,0,0,0.4);
-    }
-
-    #promptScreen > * {
-      background-color: #fefefe;
-      margin: auto;
-      padding: 15px;
-      border: 1px solid #888;
-      width: 300px;
-    }
-
-    #promptScreen h2 {
-      margin: 0;
-    }
-
-    #loginBoxMessage, #newGrammarBoxMessage {
-      margin: 8px 8px 0;
-      display: inline-block;
-      font-size: 14px;
-      font-style: italic;
-      font-weight: bold;
-    }
-
-    #loginBoxMessage:empty, #newGrammarBoxMessage:empty {
-      display: none;
-    }
-
-    #promptScreen label {
-      display: inline-block;
-      font-size: 14px;
-      width: 85px;
-    }
-
-    #promptScreen label,
-    #promptScreen input[type="submit"],
-    #promptScreen input[type="reset"] {
-      margin-top: 10px;
-    }
-
-    .close {
-      color: #aaaaaa;
-      float: right;
-      margin: -10px -5px 0 0;
-      font-size: 20px;
-      font-weight: bold;
-    }
-
-    .close:hover, .close:focus {
-      color: #e0a;
-      text-decoration: none;
-      cursor: pointer;
-    }
-
     /*
       Use media query hack to enable custom styling on WebKit/Blink only.
       Other browsers will ignore these rules.
@@ -470,7 +403,6 @@
         <input id="grammarFile" type="file" accept=".ohm" hidden>
         <button id="loadGrammar">Load...</button>
         <button id="saveGrammar">Save...</button>
-        <button id="saveGrammarAs">Save As...</button>
         <label id="saveIndicator" hidden>
           <div id="saved">Saved</div>
           <div id="edited">Edited</div>
@@ -508,7 +440,10 @@
       <div class="flex-fix"><div class="editorWrapper"></div></div>
     </div>
     <div id="bottomSplitter" class="splitter vertical"></div>
-    <div id="visualizerContainer"></div>
+    <div id="visualizerContainer">
+      <div id="parseTree"></div>
+      <div class="overlay"></div>
+    </div>
   </div>
   <div id="timeline"><input id="timeSlider" type="range" step="1"></div>
 
@@ -520,32 +455,6 @@
       <li><input type="checkbox" name="showFailures"><label>Explain parse</label></li>
       <li><input type="checkbox" name="showSpaces"><label>Show spaces</label></li>
     </ul>
-  </div>
-
-  <div id="promptScreen">
-    <div id="loginBox" hidden>
-      <span class="close">×</span>
-      <h2>Log into GitHub</h1>
-      <p id="loginBoxMessage"></p>
-      <form id="gitHubForm">
-        <label for="username">Username:</label>
-        <input type="text" name="username" id="username"><br>
-        <label for="password">Password:</label>
-        <input type="password" name="password" id="password"><br>
-        <input type="submit" value="Login">
-      </form>
-    </div>
-    <div id="newGrammarBox" hidden>
-      <span class="close">×</span>
-      <h2>Save Grammar As</h1>
-      <p id="newGrammarBoxMessage"></p>
-      <form id="newGrammarForm">
-        <label for="newGrammarName" style="width: 110px">Grammar name:</label>
-        <input type="text" name="newGrammarName" id="newGrammarName" style="width: 290px"><br>
-        <input type="submit" value="Save">
-        <input type="reset" value="Cancel">
-      </form>
-    </div>
   </div>
 
   <div id="measuringDiv">
@@ -613,7 +522,7 @@ number  (a number)
   <script src="third_party/codemirror-5.11/addon/search/searchcursor.js"></script>
   <script src="third_party/checked-emitter-1.0.1.js"></script>
   <script src="third_party/autosize.min.js"></script>
-  <script src="third_party/GitHub.bundle.min-2.3.0.js"></script>
+  <script src="third_party/vue-2.0.5.js"></script>
 
   <script src="assets/visualizer-bundle.js"></script>
 
@@ -623,6 +532,7 @@ number  (a number)
   <script src="semanticsEditor.js"></script>
   <script src="semanticsResult.js"></script>
   <script src="semanticsButton.js"></script>
+  <script src="persistence.js"></script>
   -->
 </body>
 </html>

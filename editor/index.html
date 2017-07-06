@@ -29,12 +29,14 @@
       z-index: 9;
     }
 
-    #grammars {
-      color: black;
-      font-style: normal;
-      border-radius: 3px;
+    #grammarControls {
+      margin: 0 -4px;
     }
-    #grammars label {
+    #grammarControls > * {
+      margin: 0 4px;
+    }
+
+    #grammarControls label {
       font-size: 0.75em;
     }
     #grammarName {
@@ -49,12 +51,12 @@
       min-width: 64px;
     }
 
-    /* Clever hack: when the button is disabled, make it a plain label that says 'Saved' */
+    /* Clever hack: when the button is disabled, make it say 'Saved' */
     #saveGrammar::after {
       content: 'd';
     }
     #saveGrammar:not([disabled])::after {
-      color: transparent;
+      display: none;
     }
     #saveGrammar[disabled] {
       color: #888;
@@ -444,7 +446,7 @@
     }
 
     .flex-row {
-      align-items: baseline;
+      align-items: center;
       display: flex;
       flex-direction: row;
     }
@@ -486,13 +488,13 @@
     <div id="grammarContainer">
       <div class="section-head flex-row">
         <h2>Grammar</h2>
-        <div id="grammars" hidden>
+        <div id="grammarControls" class="flex-row" hidden>
           <select id="grammarList" hidden><option value="">[local storage]</option></select>
           <label id="grammarName" class="unnamed">no file loaded</label>
           <input id="grammarFile" type="file" accept=".ohm" hidden>
           <button class="outline-btn" id="loadGrammar">Load...</button>
           <button class="outline-btn" id="saveGrammar">Save</button>
-          <button class="outline-btn" id="saveGrammarAs">Save As...</button>
+          <div id="grammarDropdown"><!-- See components/ellipsis-dropdown.vue --></div>
         </div>
       </div>
       <div class="flex-fix"><div class="editorWrapper"></div></div>
@@ -559,41 +561,41 @@
   <div id="operationMenu" class="contextMenu" hidden><ul></ul></div>
   <div hidden>
     <pre id="sampleGrammar">Arithmetic {
-Exp
-  = AddExp
+  Exp
+    = AddExp
 
-AddExp
-  = AddExp "+" MulExp  -- plus
-  | AddExp "-" MulExp  -- minus
-  | MulExp
+  AddExp
+    = AddExp "+" MulExp  -- plus
+    | AddExp "-" MulExp  -- minus
+    | MulExp
 
-MulExp
-  = MulExp "*" ExpExp  -- times
-  | MulExp "/" ExpExp  -- divide
-  | ExpExp
+  MulExp
+    = MulExp "*" ExpExp  -- times
+    | MulExp "/" ExpExp  -- divide
+    | ExpExp
 
-ExpExp
-  = PriExp "^" ExpExp  -- power
-  | PriExp
+  ExpExp
+    = PriExp "^" ExpExp  -- power
+    | PriExp
 
-PriExp
-  = "(" Exp ")"  -- paren
-  | "+" PriExp   -- pos
-  | "-" PriExp   -- neg
-  | ident
-  | number
+  PriExp
+    = "(" Exp ")"  -- paren
+    | "+" PriExp   -- pos
+    | "-" PriExp   -- neg
+    | ident
+    | number
 
-ident  (an identifier)
-  = letter alnum*
+  ident  (an identifier)
+    = letter alnum*
 
-number  (a number)
-  = digit* "." digit+  -- fract
-  | digit+             -- whole
+  number  (a number)
+    = digit* "." digit+  -- fract
+    | digit+             -- whole
 }</pre>
     <pre id="sampleExamples">
       <pre>2 * (42 - 1) / 9</pre>
       <pre>1+2*3</pre>
-      <pre>I CAN HAS CHEEZBURGER?</pre>
+      <pre>oh no</pre>
       <pre> (  	123   ) </pre>
       <pre>(2+4)*7</pre>
     </pre>
@@ -603,7 +605,6 @@ number  (a number)
 
   <script src="third_party/es6.js"></script>
   <script src="third_party/d3.min.js"></script>
-  <script src="third_party/FileSaver.js"></script>
   <script src="third_party/codemirror-5.11/lib/codemirror.js"></script>
   <script src="third_party/codemirror-5.11/addon/display/placeholder.js"></script>
   <script src="third_party/codemirror-5.11/addon/search/search.js"></script>

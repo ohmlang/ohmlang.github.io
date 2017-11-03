@@ -14,13 +14,13 @@ Ohm is closely related to [OMeta](http://tinlizzie.org/ometa/), another PEG-base
 
 ## Terminology
 
-<script type="text/markscript">
+<!-- @markscript
   var ohm = require('ohm-js');
   function checkGrammar(source) {
   	assert(ohm.grammar(source));
   }
   markscript.transformNextBlock(checkGrammar);
-</script>
+-->
 
 ```
 Arithmetic {
@@ -41,6 +41,12 @@ Here is a full list of the different kinds of parsing expressions supported by O
 Matches exactly the characters contained inside the quotation marks.
 
 Special characters (`"`, `\`, and `'`) can be escaped with a backslash -- e.g., `"\""` will match a literal quote character in the input stream. Other valid escape sequences include: `\b` (backspace), `\f` (form feed), `\n` (line feed), `\r` (carriage return), and `\t` (tab), as well as `\x` followed by 2 hex digits and `\u` followed by 4 hex digits, for matching characters by code point.
+
+### Terminal Range
+
+<pre><code><i>start</i>..<i>end</i></code></pre>
+
+Matches exactly one character whose character code is between the terminals _start_ and _end_ (inclusive). E.g., `"a".."c"` will match `'a'`, `'b'`, or `'c'`. Note: _start_ and _end_ must be 1-character [Terminal](#terminals) expressions.
 
 ### Rule Application
 
@@ -82,13 +88,13 @@ As with the `*` and `+` operators, spaces are skipped when used in a [syntactic 
 
 <pre><code><i>expr1</i> | <i>expr2</i></code></pre>
 
-Matches the expression `expr1`, and if that does not succeed, matches the expression `expr2`. E.g., `letter | number` will match `'a'`, `'9'`, ...
+Matches the expression `expr1`, and if that does not succeed, matches the expression `expr2`. E.g., `letter | digit` will match `'a'`, `'9'`, ...
 
 ### Lookahead: &
 
 <pre><code>& <i>expr</i></code></pre>
 
-Succeeds if the expression `expr` can be matched, but does not consume anything from the input stream. Usually used as part of a sequence, e.g. `letter &number` will match `'a9'`, but only consume 'a'. `&"a" letter+` will match any string of letters that begins with 'a'.
+Succeeds if the expression `expr` can be matched, but does not consume anything from the input stream. Usually used as part of a sequence, e.g. `letter &digit` will match `'a9'`, but only consume 'a'. `&"a" letter+` will match any string of letters that begins with 'a'.
 
 ### Negative Lookahead: ~
 
@@ -167,12 +173,12 @@ Defines a new rule named `ruleName` which has _n_ parameters. In the rule body _
 
 Rule declarations may optionally have a description, which is a parenthesized "comment" following the name of the rule in its declaration. Rule descriptions are used to produce better error messages for end users of a language when input is not recognized. For example:
 
-<script type="text/markscript">
+<!-- @markscript
   function checkRule(source) {
     assert(ohm.ohmGrammar.match(source, 'Rule').succeeded());
   }
   markscript.transformNextBlock(checkRule);
-</script>
+-->
 
 ```
 ident (an identifier)
@@ -185,9 +191,9 @@ ident (an identifier)
 
 When a parsing expression is followed by the characters `--` and a name, it signals an _inline rule declaration_. This is most commonly used in alternation expressions to ensure that each branch has the same arity. For example, the following declaration:
 
-<script type="text/markscript">
+<!-- @markscript
   markscript.transformNextBlock(checkRule);
-</script>
+-->
 
 ```
 AddExp = AddExp "+" MulExp  -- plus

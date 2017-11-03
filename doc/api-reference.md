@@ -42,7 +42,7 @@ A Grammar instance `g` has the following methods:
 
 <a name="Grammar.match"><b><pre class="api">g.match(str: string, optStartRule?: string) &rarr; MatchResult</pre></b></a>
 
-Try to match `str` against `g`, returning a MatchResult. If `optStartRule` is given, it specifies the rule on which to start matching. By default, the start rule is inherited from the supergrammar, or if there is no supergrammar specified, it is the first rule in `g`'s definition.
+Try to match `str` against `g`, returning a [MatchResult](#matchresult-objects). If `optStartRule` is given, it specifies the rule on which to start matching. By default, the start rule is inherited from the supergrammar, or if there is no supergrammar specified, it is the first rule in `g`'s definition.
 
 <b><pre class="api">g.matcher()</pre></b>
 
@@ -104,7 +104,7 @@ Return `true` if the match failed, otherwise `false`.
 
 ### MatchFailure objects
 
-When `r.failed()` is `true`, `r` has the following additional properties:
+When `r.failed()` is `true`, `r` has the following additional properties and methods:
 
 <b><pre class="api">r.message: string</pre></b>
 
@@ -113,6 +113,14 @@ Contains a message indicating where and why the match failed. This message is su
 <b><pre class="api">r.shortMessage: string</pre></b>
 
 Contains an abbreviated version of `r.message` that does not include an excerpt from the invalid input.
+
+<b><pre class="api">r.getRightmostFailurePosition() &rarr; number</pre></b>
+
+Return the index in the input stream at which the match failed.
+
+<b><pre class="api">r.getRightmostFailures() &rarr; Array</pre></b>
+
+Return an array of Failure objects describing the failures the occurred at the rightmost failure position.
 
 <h2 id="semantics">Semantics, Operations, and Attributes</h2>
 
@@ -155,12 +163,12 @@ A semantic action is a function that computes the value of an operation or attri
 
 Generally, you write a semantic action for each rule in your grammar, and store them together in an _action dictionary_. For example, given the following grammar:
 
-<script type="text/markscript">
+<!-- @markscript
   // Take the grammar below and instantiate it as `g` in the markscript environment.
   markscript.transformNextBlock(function(code) {
     return "var g = require('ohm-js').grammar('" + code.replace(/\n/g, '\\n') + "');";
   });
-</script>
+-->
 
 ```
 Name {
@@ -171,14 +179,14 @@ Name {
 
 A set of semantic actions for this grammar might look like this:
 
-<script type="text/markscript">
+<!-- @markscript
   // Replace '...' in the action dict below with some actual function definitions,
   // so that we can be sure that the code actually works.
   markscript.transformNextBlock(function(code) {
     return code.replace('...', "return lastName.x().toUpperCase() + ', ' + firstName.x()")
                .replace('...', "return this.sourceString;")
   });
-</script>
+-->
 
 ```js
 var actions = {
@@ -187,11 +195,11 @@ var actions = {
 };
 ```
 
-<script type="text/markscript">
+<!-- @markscript
   // Verify that the action dict actually works.
   var semantics = g.createSemantics().addOperation('x', actions);
   assert.equal(semantics(g.match('Guy Incognito')).x(), 'INCOGNITO, Guy');
-</script>
+-->
 
 The value of an operation or attribute for a node is the result of invoking the node's matching semantic action. In the grammar above, the body of the `FullName` rule produces two values -- one for each application of the `name` rule. The values are represented as parse nodes, which are passed as arguments when the semantic action is invoked. An error is thrown if the function arity does not match the number of values produced by the expression.
 

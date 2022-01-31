@@ -1,0 +1,65 @@
+<!doctype html>
+<title>Incremental Packrat Parsing</title>
+<link rel="stylesheet" href="third_party/codemirror-5.23.0/lib/codemirror.css">
+<style>
+  body {
+    background-color: #fafafa;
+    color: #333;
+    font-family: system, -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+    font-size: 14px;
+  }
+  .CodeMirror {
+    background-color: white;
+    border: 2px solid #DB524B;
+    border-radius: 3px;
+    font-family: Menlo, Monaca, monospace;
+  }
+  .pass .CodeMirror {
+    border-color: #58B958;
+  }
+  .arrow {
+    color: #aaa;
+    font-size: 12px;
+    margin-right: 0.3em;
+  }
+  .disclosure {
+    color: inherit;
+    text-decoration: none;
+  }
+  #log {
+    font-family: inherit;
+    margin-top: 1em;
+  }
+</style>
+
+<div id="main"></div>
+
+<pre id="log">
+</pre>
+
+<script src="standard.js"></script>
+<script src="incremental.js"></script>
+<script src="third_party/codemirror-5.23.0/lib/codemirror.js"></script>
+<script>
+  var mainEl = document.querySelector('#main');
+  var log = document.querySelector('#log');
+
+  var editor = CodeMirror(mainEl);
+  editor.on('beforeChange', (cm, change) => {
+    const startIdx = cm.indexFromPos(change.from);
+    const endIdx = cm.indexFromPos(change.to);
+    log.textContent += `\nm.replaceRange(${startIdx}, ${endIdx}, ${JSON.stringify(change.text[0])});`
+    incArithmetic.replaceInputRange(startIdx, endIdx, change.text.join('\n'));
+  });
+  editor.on('change', (cm) => {
+    const succeeded = arithmetic.match(cm.getValue());
+    const incSucceeded = incArithmetic.match();
+
+    if (succeeded !== incSucceeded) {
+      console.error('oh noes: "' + incArithmetic.input + '"');
+    }
+    mainEl.classList.toggle('pass', succeeded);
+    return true;
+  });
+  editor.focus();
+</script>

@@ -1,0 +1,469 @@
+html {
+  color: #222;
+  font-size: 1em;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/*
+ * Remove text-shadow in selection highlight:
+ * https://twitter.com/miketaylr/status/12228805301
+ *
+ * These selection rule sets have to be separate.
+ * Customize the background color to match your design.
+ */
+
+::selection {
+  background: #b3d4fc;
+  text-shadow: none;
+}
+
+/*
+ * A better looking default horizontal rule
+ */
+
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin: 1em 0;
+  padding: 0;
+}
+
+/*
+ * Remove the gap between audio, canvas, iframes,
+ * images, videos and the bottom of their containers:
+ * https://github.com/h5bp/html5-boilerplate/issues/440
+ */
+
+audio,
+canvas,
+iframe,
+img,
+svg,
+video {
+  vertical-align: middle;
+}
+
+/*
+ * Remove default fieldset styles.
+ */
+
+fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+/*
+ * Allow only vertical resizing of textareas.
+ */
+
+textarea {
+  resize: vertical;
+}
+
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+
+body {
+  background-color: #fcfcfc;
+  font-family: 'mb-charter';
+  margin: 48px 24px;
+  text-align: center;
+}
+
+a {
+  color: #222;
+}
+
+a:hover {
+  color: #0096FF;  /* Bright blue */
+  transition: color 0.05s;
+}
+
+h1, h2, h3, h4, h5, h6, hgroup,
+ul, ol, dd,
+p, figure,
+pre, table, fieldset, hr {
+  margin: 0 0 18px 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.2;
+  color: #333;
+  font-weight: 600;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
+  color: inherit;
+  font-weight: inherit;
+}
+
+h1 {
+  color: #000;
+  font-size: 36px;
+  margin-bottom: 48px;
+}
+
+h1 a {
+  color: inherit;
+  font-weight: inherit;
+  text-decoration: none;
+}
+
+h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+h3 {
+  color: #4f4f4f;
+  font-size: 18px;
+  margin-bottom: 4px;
+}
+
+h4 {
+  color: #4f4f4f;
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+#content {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 48rem;
+  text-align: justify;
+}
+
+blockquote {
+  border-left: 2px solid #ddd;
+  color: #666;
+  font-style: italic;
+  margin-left: 0;
+  padding-left: 24px;
+}
+
+h1 {
+  font-size: 48px;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+#authorship {
+  font-style: italic;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+code {
+  color: black;
+  display: inline-block;
+}
+
+/* Fenced code blocks */
+pre > code {
+  background-color: white;
+  display: block;
+  padding: 12px 12px;
+}
+
+pre > code,
+video {
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  margin-bottom: 24px;
+}
+
+img,
+table {
+  border: 1px solid #ccc;
+}
+
+li {
+  text-align: left;
+}
+
+.float-left {
+  float: left;
+  margin-top: 4px;  /* To align with text top */
+  margin-right: 20px;
+}
+
+.float-right {
+  float: right;
+  margin-top: 4px;  /* To align with text top */
+  margin-left: 20px;
+}
+
+th {
+  background: #7f7f7f;
+  font-weight: normal;
+}
+
+th, th code, td:first-child, td:first-child code {
+  color: white;
+}
+
+td code:first-child, td code:last-child {
+  border-bottom: 1px solid black;
+  color: #666;
+  margin: 6px 0;
+}
+
+td:first-child {
+  background: #7f7f7f;
+}
+
+th, td {
+  border-left: 1px solid #ccc;
+  text-align: center;
+}
+
+td {
+  line-height: 1;
+  padding: 0 5px;
+}
+
+th img {
+  border: none;
+}
+
+th:first-child, td:first-child {
+  border-left: 0px;
+}
+
+tbody tr {
+  border-top: 1px solid #ccc;
+}
+
+/* ==========================================================================
+   Web fonts
+   ========================================================================== */
+
+@font-face {
+  font-family: 'mb-charter';
+  src: url('../webfonts/Charter/charter_regular-webfont.eot');
+  src: url('../webfonts/Charter/charter_regular-webfont.eot?#iefix') format('embedded-opentype'),
+       url('../webfonts/Charter/charter_regular-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'mb-charter';
+  src: url('../webfonts/Charter/charter_bold_italic-webfont.eot');
+  src: url('../webfonts/Charter/charter_bold_italic-webfont.eot?#iefix') format('embedded-opentype'),
+       url('../webfonts/Charter/charter_bold_italic-webfont.woff') format('woff');
+  font-weight: bold;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'mb-charter';
+  src: url('../webfonts/Charter/charter_bold-webfont.eot');
+  src: url('../webfonts/Charter/charter_bold-webfont.eot?#iefix') format('embedded-opentype'),
+       url('../webfonts/Charter/charter_bold-webfont.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'mb-charter';
+  src: url('../webfonts/Charter/charter_italic-webfont.eot');
+  src: url('../webfonts/Charter/charter_italic-webfont.eot?#iefix') format('embedded-opentype'),
+       url('../webfonts/Charter/charter_italic-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: italic;
+}
+
+/* ==========================================================================
+   Helper classes
+   ========================================================================== */
+
+/*
+ * Hide visually and from screen readers
+ */
+
+.hidden {
+  display: none !important;
+}
+
+/*
+ * Hide only visually, but have it available for screen readers:
+ * http://snook.ca/archives/html_and_css/hiding-content-for-accessibility
+ */
+
+.visuallyhidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+/*
+ * Extends the .visuallyhidden class to allow the element
+ * to be focusable when navigated to via the keyboard:
+ * https://www.drupal.org/node/897638
+ */
+
+.visuallyhidden.focusable:active,
+.visuallyhidden.focusable:focus {
+  clip: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static;
+  width: auto;
+}
+
+/*
+ * Hide visually and from screen readers, but maintain layout
+ */
+
+.invisible {
+  visibility: hidden;
+}
+
+/*
+ * Clearfix: contain floats
+ *
+ * For modern browsers
+ * 1. The space content is one way to avoid an Opera bug when the
+ *    `contenteditable` attribute is included anywhere else in the document.
+ *    Otherwise it causes space to appear at the top and bottom of elements
+ *    that receive the `clearfix` class.
+ * 2. The use of `table` rather than `block` is only necessary if using
+ *    `:before` to contain the top-margins of child elements.
+ */
+
+.clearfix:before,
+.clearfix:after {
+  content: " "; /* 1 */
+  display: table; /* 2 */
+}
+
+.clearfix:after {
+  clear: both;
+}
+
+/* ==========================================================================
+   EXAMPLE Media Queries for Responsive Design.
+   These examples override the primary ('mobile first') styles.
+   Modify as content requires.
+   ========================================================================== */
+
+@media only screen and (min-width: 35em) {
+  /* Style adjustments for viewports that meet the condition */
+}
+
+@media print, (min-resolution: 1.25dppx), (min-resolution: 120dpi) {
+  /* Style adjustments for high resolution devices */
+}
+
+/* ==========================================================================
+   Print styles.
+   Inlined to avoid the additional HTTP request:
+   http://www.phpied.com/delay-loading-your-print-css/
+   ========================================================================== */
+
+@media print {
+  *,
+  *:before,
+  *:after,
+  *:first-letter,
+  *:first-line {
+    background: transparent !important;
+    color: #000 !important; /* Black prints faster:
+                   http://www.sanbeiji.com/archives/953 */
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  a,
+  a:visited {
+    text-decoration: underline;
+  }
+
+  a[href]:after {
+    content: " (" attr(href) ")";
+  }
+
+  abbr[title]:after {
+    content: " (" attr(title) ")";
+  }
+
+  /*
+   * Don't show links that are fragment identifiers,
+   * or use the `javascript:` pseudo protocol
+   */
+
+  a[href^="#"]:after,
+  a[href^="javascript:"]:after {
+    content: "";
+  }
+
+  pre,
+  blockquote {
+    border: 1px solid #999;
+    page-break-inside: avoid;
+  }
+
+  /*
+   * Printing Tables:
+   * http://css-discuss.incutio.com/wiki/Printing_Tables
+   */
+
+  thead {
+    display: table-header-group;
+  }
+
+  tr,
+  img {
+    page-break-inside: avoid;
+  }
+
+  img {
+    max-width: 100% !important;
+  }
+
+  p,
+  h2,
+  h3 {
+    orphans: 3;
+    widows: 3;
+  }
+
+  h2,
+  h3 {
+    page-break-after: avoid;
+  }
+}
+
+cstnode {
+  display: inline-block;
+  white-space: pre;
+  font-family: Monaco, Menlo, sans-serif;
+  font-size: 14px;
+  background-color: #efefef;
+  padding: 0 2px;
+}
+
+cstnode > caselabel {
+  margin-left: 10px;
+  font-style: italic;
+  color: #777;
+}
+
+cstnode > caselabel::before {
+  content: "\2014";
+  margin-right: 5px;
+}
+

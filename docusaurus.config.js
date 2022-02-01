@@ -16,8 +16,14 @@ async function createConfig() {
     onBrokenLinks: 'error',
     onBrokenMarkdownLinks: 'error',
     favicon: 'img/favicon.ico',
-    organizationName: 'harc', // Usually your GitHub org/user name.
-    projectName: 'ohm', // Usually your repo name.
+    
+    // These are used for deployment.
+    organizationName: 'ohmlang',
+    projectName: 'ohmlang.github.io',
+    deploymentBranch: 'gh-pages',
+    
+    // As recommended by https://docusaurus.io/docs/deployment#deploying-to-github-pages
+    trailingSlash: false,
 
     presets: [
       [
@@ -32,6 +38,7 @@ async function createConfig() {
               `https://github.com/harc/ohm/edit/master/doc/${docPath}`,
             remarkPlugins: [remarkComment],
           },
+          blog: false,
           // blog: {
           //   showReadingTime: true,
           //   // Please change this to your repo.

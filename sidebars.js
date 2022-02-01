@@ -21,7 +21,12 @@ const sidebars = {
     {
       type: 'doc',
       label: 'Introduction',
-      id: 'README',
+      id: 'intro',
+    },
+    {
+      type: 'link',
+      label: 'Tutorial',
+      href: 'https://nextjournal.com/dubroy/ohm-parsing-made-easy'
     },
     {
       type: 'category',

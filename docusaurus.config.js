@@ -55,7 +55,7 @@ async function createConfig() {
           items: [
             {
               type: 'doc',
-              docId: 'README',
+              docId: 'intro',
               position: 'left',
               label: 'Docs',
             },

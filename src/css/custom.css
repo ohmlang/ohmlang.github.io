@@ -4,8 +4,8 @@
  * work well for content-centric websites.
  */
 
- /* See https://docusaurus.io/docs/styling-layout to change these. */
- :root {
+/* See https://docusaurus.io/docs/styling-layout to change these. */
+:root {
   --ifm-color-primary: #893df6;
   --ifm-color-primary-dark: #7720f5;
   --ifm-color-primary-darker: #6e11f4;

@@ -7,7 +7,8 @@ const FeatureList = [
     title: 'Grammar extension',
     description: (
       <>
-        Object-oriented grammar extension makes it easy to extend an existing language with new syntax.
+        Object-oriented grammar extension makes it easy to extend an existing
+        language with new syntax.
       </>
     ),
   },
@@ -15,7 +16,10 @@ const FeatureList = [
     title: 'Modular semantic actions',
     description: (
       <>
-        Unlike many similar tools, Ohm completely separates grammars from semantic actions. This separation improves modularity and extensibility, and makes both grammars and semantic actions easier to read and understand.
+        Unlike many similar tools, Ohm completely separates grammars from
+        semantic actions. This separation improves modularity and extensibility,
+        and makes both grammars and semantic actions easier to read and
+        understand.
       </>
     ),
   },
@@ -23,13 +27,15 @@ const FeatureList = [
     title: 'Online editor and visualizer',
     description: (
       <>
-        The <a href="/editor">Ohm Editor</a> provides instant feedback and an interactive visualization of the parse. It'll make you feel like you have superpowers. 💪
+        The <a href="/editor">Ohm Editor</a> provides instant feedback and an
+        interactive visualization of the parse. It'll make you feel like you
+        have superpowers. 💪
       </>
     ),
   },
 ];
 
-function Feature({title, description}) {
+function Feature({ title, description }) {
   return (
     <div className={clsx('col col--4')}>
       <div className="text--center padding-horiz--md">

@@ -170,4 +170,3 @@ b                    ✓ Unicode [Ll] character ⇒  "b"
                      ✗ Unicode [Ltmo] character
            ✓ end ⇒  ""
 ```
-

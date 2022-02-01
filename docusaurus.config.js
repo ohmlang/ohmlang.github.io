@@ -9,7 +9,8 @@ async function createConfig() {
   const remarkComment = (await import('remark-comment')).default;
   return {
     title: 'Ohm',
-    tagline: 'A JavaScript library for building parsers, interpreters, compilers, and more.',
+    tagline:
+      'A JavaScript library for building parsers, interpreters, compilers, and more.',
     url: 'https://ohmjs.org',
     baseUrl: '/',
     onBrokenLinks: 'warn',
@@ -26,7 +27,8 @@ async function createConfig() {
           docs: {
             sidebarPath: require.resolve('./sidebars.js'),
             // Please change this to your repo.
-            editUrl: 'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+            editUrl:
+              'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
             remarkPlugins: [remarkComment],
           },
           // blog: {
@@ -59,8 +61,8 @@ async function createConfig() {
               position: 'left',
               label: 'Docs',
             },
-//            {to: '/blog', label: 'Blog', position: 'left'},
-            {to: 'pathname:///editor', label: 'Editor', position: 'left'},
+            //            {to: '/blog', label: 'Blog', position: 'left'},
+            { to: 'pathname:///editor', label: 'Editor', position: 'left' },
             {
               href: 'https://github.com/harc/ohm',
               label: 'GitHub',

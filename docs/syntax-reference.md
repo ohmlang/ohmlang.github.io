@@ -144,7 +144,7 @@ as well as multiline (`/* */`) comments like:
 
 ## Built-in Rules
 
-(See [src/built-in-rules.ohm](../src/built-in-rules.ohm).)
+(See [built-in-rules.ohm](https://github.com/harc/ohm/blob/master/packages/ohm-js/src/built-in-rules.ohm).)
 
 `any`: Matches the next character in the input stream, if one exists.
 
@@ -327,7 +327,7 @@ A few other details that are helpful to know:
 
 1. If the start rule is a syntactic rule, both leading and trailing spaces are skipped around the top-level application.
 2. When the body of a rule contains a [repetition operator](#repetition-operators---) (e.g. `+` or `*`), spaces are skipped before each match. In other words, `Names = name+` is equivalent to `names = (spaces name)+`.
-3. The [lexification operator (`#`)](lexification-) can be used in the body of a syntactic rule to prevent space skipping in specific places. For example:
+3. The [lexification operator (`#`)](#lexification-) can be used in the body of a syntactic rule to prevent space skipping in specific places. For example:
 
 <!-- @markscript
   let syntacticKeyValueDef;

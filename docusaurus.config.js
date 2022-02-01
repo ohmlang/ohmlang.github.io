@@ -13,8 +13,8 @@ async function createConfig() {
       'A JavaScript library for building parsers, interpreters, compilers, and more.',
     url: 'https://ohmjs.org',
     baseUrl: '/',
-    onBrokenLinks: 'warn',
-    onBrokenMarkdownLinks: 'warn',
+    onBrokenLinks: 'error',
+    onBrokenMarkdownLinks: 'error',
     favicon: 'img/favicon.ico',
     organizationName: 'harc', // Usually your GitHub org/user name.
     projectName: 'ohm', // Usually your repo name.

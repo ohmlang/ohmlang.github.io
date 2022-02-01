@@ -62,7 +62,12 @@ async function createConfig() {
               label: 'Docs',
             },
             //            {to: '/blog', label: 'Blog', position: 'left'},
-            { to: 'pathname:///editor', label: 'Editor', position: 'left' },
+            {
+              to: 'pathname:///editor',
+              label: 'Editor',
+              position: 'left',
+              target: '_self',
+            },
             {
               href: 'https://github.com/harc/ohm',
               label: 'GitHub',

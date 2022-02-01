@@ -47,7 +47,7 @@ export default function Home() {
       <HomepageHeader />
       <main>
         <div className="container">
-          <div className={styles.homepageDetail}>
+          <div className={clsx(styles.homepageContent, styles.largeText)}>
             <p>
               Ohm is a parsing toolkit consisting of a library and a
               domain-specific language. You can use it to parse custom file
@@ -57,9 +57,9 @@ export default function Home() {
 
             <p>
               The <i>Ohm language</i> is based on{' '}
-              <a href="http://en.wikipedia.org/wiki/Parsing_expression_grammar">
+              <Link href="http://en.wikipedia.org/wiki/Parsing_expression_grammar">
                 parsing expression grammars
-              </a>{' '}
+              </Link>{' '}
               (PEGs), which are a formal way of describing syntax, similar to
               regular expressions and context-free grammars. The{' '}
               <i>Ohm library</i> provides a JavaScript interface for creating
@@ -68,6 +68,31 @@ export default function Home() {
           </div>
         </div>
         <HomepageFeatures />
+        <div className="container">
+          <div className={styles.homepageContent}>
+            <h2>Academic Publications</h2>
+            <ul>
+              <li>
+                <Link href="pathname:///pubs/sle2017/incremental-packrat-parsing.pdf">
+                  Incremental Packrat Parsing
+                </Link>{' '}
+                (SLE 2017)
+              </li>
+              <li>
+                <Link href="pathname:///pubs/live2016/">
+                  Language Hacking in a Live Programming Environment
+                </Link>{' '}
+                (LIVE 2016)
+              </li>
+              <li>
+                <Link href="pathname:///pubs/dls2016/modular-semantic-actions.pdf">
+                  Modular Semantic Actions
+                </Link>{' '}
+                (DLS 2016)
+              </li>
+            </ul>
+          </div>
+        </div>
       </main>
     </Layout>
   );

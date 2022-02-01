@@ -22,8 +22,11 @@
   justify-content: center;
 }
 
-.homepageDetail {
+.homepageContent {
   margin: 4rem auto;
   max-width: 48rem;
+}
+
+.largeText {
   font-size: 1.25rem;
 }

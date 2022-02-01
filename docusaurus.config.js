@@ -69,18 +69,21 @@ async function createConfig() {
           ],
         },
         footer: {
-          style: 'dark',
+          style: 'light',
           links: [
-            /*
             {
-              title: 'Docs',
+              title: 'Learn',
               items: [
                 {
                   label: 'Tutorial',
-                  to: '/docs/intro',
+                  href: 'https://nextjournal.com/dubroy/ohm-parsing-made-easy',
+                },
+                {
+                  label: 'Docs',
+                  to: 'docs/intro',
                 },
               ],
-            },*/
+            },
             {
               title: 'Community',
               items: [
@@ -89,8 +92,8 @@ async function createConfig() {
                   href: 'https://discord.gg/KwxY5gegRQ',
                 },
                 {
-                  label: 'Twitter',
-                  href: 'https://twitter.com/_ohmjs',
+                  label: 'GitHub Discussions',
+                  href: 'https://github.com/harc/ohm/discussions',
                 },
               ],
             },
@@ -98,12 +101,12 @@ async function createConfig() {
               title: 'More',
               items: [
                 {
-                  label: 'Blog',
-                  to: '/blog',
-                },
-                {
                   label: 'GitHub',
                   href: 'https://github.com/harc/ohm',
+                },
+                {
+                  label: 'Twitter',
+                  href: 'https://twitter.com/_ohmjs',
                 },
               ],
             },

@@ -27,8 +27,8 @@ async function createConfig() {
           docs: {
             sidebarPath: require.resolve('./sidebars.js'),
             // Please change this to your repo.
-            editUrl:
-              'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+            editUrl: ({ docPath }) =>
+              `https://github.com/harc/ohm/edit/master/doc/${docPath}`,
             remarkPlugins: [remarkComment],
           },
           // blog: {

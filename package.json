@@ -36,6 +36,7 @@
     ]
   },
   "devDependencies": {
+    "docusaurus-plugin-fathom": "^1.1.0",
     "prettier": "^2.5.1",
     "remark-comment": "^1.0.0"
   },

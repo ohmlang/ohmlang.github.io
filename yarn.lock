@@ -6310,11 +6310,6 @@ remark-comment@^1.0.0:
     micromark-util-character "^1.1.0"
     micromark-util-symbol "^1.0.1"
 
-remark-comments@^1.2.9:
-  version "1.2.9"
-  resolved "https://registry.yarnpkg.com/remark-comments/-/remark-comments-1.2.9.tgz#9db68a2911b21b60dfad76369d3cfded946970ca"
-  integrity sha512-IxkgOG6mywoS549abonLIJZy9pZ0VETFLzC9rUyDn0gtbviwxTvgwvm+hTkaL2whGbSJn2bKqyZ6AfYaUal2pw==
-
 remark-emoji@^2.1.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/remark-emoji/-/remark-emoji-2.2.0.tgz#1c702090a1525da5b80e15a8f963ef2c8236cac7"

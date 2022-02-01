@@ -37,8 +37,7 @@
   },
   "devDependencies": {
     "prettier": "^2.5.1",
-    "remark-comment": "^1.0.0",
-    "remark-comments": "^1.2.9"
+    "remark-comment": "^1.0.0"
   },
   "prettier": {
     "singleQuote": true

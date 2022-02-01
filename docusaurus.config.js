@@ -70,8 +70,9 @@ async function createConfig() {
             },
             {
               href: 'https://github.com/harc/ohm',
-              label: 'GitHub',
               position: 'right',
+              className: 'header-github-link',
+              'aria-label': 'GitHub repository',
             },
           ],
         },

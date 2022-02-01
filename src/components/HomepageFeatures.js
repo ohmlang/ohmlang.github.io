@@ -17,9 +17,8 @@ const FeatureList = [
     description: (
       <>
         Unlike many similar tools, Ohm completely separates grammars from
-        semantic actions. This separation improves modularity and extensibility,
-        and makes both grammars and semantic actions easier to read and
-        understand.
+        semantic actions. This improves modularity and extensibility, and makes
+        both grammars and semantic actions easier to read and understand.
       </>
     ),
   },

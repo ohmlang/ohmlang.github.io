@@ -1,8 +1,41 @@
-# ohmlang.github.io
+# Website
 
-Repo for all content hosted on [ohmlang.github.io](https://ohmlang.github.io).
+This website is built using [Docusaurus 2](https://docusaurus.io/), a modern static website generator.
 
-## Notes for Ohm team members
+### Installation
 
-- To edit the home page, use the [GitHub page generator](https://github.com/ohmlang/ohmlang.github.io/generated_pages/new).
-- To push the latest version of Ohm's `doc/`, `dist/`, and `visualizer/` directories, run [`bin/deploy-gh-pages.sh`](https://github.com/cdglabs/ohm/blob/master/bin/deploy-gh-pages.sh) from an Ohm checkout. See the comments at the top of that file for more details.
+```
+$ yarn
+```
+
+### Local Development
+
+```
+$ yarn start
+```
+
+This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
+
+### Build
+
+```
+$ yarn build
+```
+
+This command generates static content into the `build` directory and can be served using any static contents hosting service.
+
+### Deployment
+
+Using SSH:
+
+```
+$ USE_SSH=true yarn deploy
+```
+
+Not using SSH:
+
+```
+$ GIT_USER=<Your GitHub username> yarn deploy
+```
+
+If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.

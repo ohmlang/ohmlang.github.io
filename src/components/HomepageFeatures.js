@@ -4,8 +4,7 @@ import styles from './HomepageFeatures.module.css';
 
 const FeatureList = [
   {
-    title: 'Grammar inheritance',
-    Svg: require('../../static/img/undraw_docusaurus_mountain.svg').default,
+    title: 'Grammar extension',
     description: (
       <>
         Object-oriented grammar extension makes it easy to extend an existing language with new syntax.
@@ -14,7 +13,6 @@ const FeatureList = [
   },
   {
     title: 'Modular semantic actions',
-    Svg: require('../../static/img/undraw_docusaurus_tree.svg').default,
     description: (
       <>
         Unlike many similar tools, Ohm completely separates grammars from semantic actions. This separation improves modularity and extensibility, and makes both grammars and semantic actions easier to read and understand.
@@ -23,21 +21,17 @@ const FeatureList = [
   },
   {
     title: 'Online editor and visualizer',
-    Svg: require('../../static/img/undraw_docusaurus_react.svg').default,
     description: (
       <>
-        The <a href="/editor">Ohm Editor</a> provides instant feedback and an interactive visualization that makes the entire execution of the parser visible and tangible. It'll make you feel like you have superpowers. 💪
+        The <a href="/editor">Ohm Editor</a> provides instant feedback and an interactive visualization of the parse. It'll make you feel like you have superpowers. 💪
       </>
     ),
   },
 ];
 
-function Feature({Svg, title, description}) {
+function Feature({title, description}) {
   return (
     <div className={clsx('col col--4')}>
-      <div className="text--center">
-        <Svg className={styles.featureSvg} alt={title} />
-      </div>
       <div className="text--center padding-horiz--md">
         <h3>{title}</h3>
         <p>{description}</p>

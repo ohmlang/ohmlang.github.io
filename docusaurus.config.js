@@ -74,6 +74,12 @@ async function createConfig() {
               className: 'header-github-link',
               'aria-label': 'GitHub repository',
             },
+            {
+              href: 'https://twitter.com/_ohmjs',
+              position: 'right',
+              className: 'header-twitter-link',
+              'aria-label': '@_ohmjs on Twitter',
+            },
           ],
         },
         footer: {

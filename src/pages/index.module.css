@@ -21,3 +21,9 @@
   align-items: center;
   justify-content: center;
 }
+
+.homepageDetail {
+  margin: 4rem auto;
+  max-width: 48rem;
+  font-size: 1.25rem;
+}

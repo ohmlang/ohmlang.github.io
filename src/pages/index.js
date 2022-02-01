@@ -19,7 +19,7 @@ function HomepageHeader() {
             className="button button--secondary button--lg"
             to="/docs/intro"
           >
-            Docusaurus Tutorial - 5min ⏱️
+            Get started
           </Link>
         </div>
       </div>
@@ -46,6 +46,27 @@ export default function Home() {
       </Head>
       <HomepageHeader />
       <main>
+        <div className="container">
+          <div className={styles.homepageDetail}>
+            <p>
+              Ohm is a parsing toolkit consisting of a library and a
+              domain-specific language. You can use it to parse custom file
+              formats or quickly build parsers, interpreters, and compilers for
+              programming languages.
+            </p>
+
+            <p>
+              The <i>Ohm language</i> is based on{' '}
+              <a href="http://en.wikipedia.org/wiki/Parsing_expression_grammar">
+                parsing expression grammars
+              </a>{' '}
+              (PEGs), which are a formal way of describing syntax, similar to
+              regular expressions and context-free grammars. The{' '}
+              <i>Ohm library</i> provides a JavaScript interface for creating
+              parsers, interpreters, and more from the grammars you write.
+            </p>
+          </div>
+        </div>
         <HomepageFeatures />
       </main>
     </Layout>

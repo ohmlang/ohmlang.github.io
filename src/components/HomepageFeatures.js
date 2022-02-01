@@ -1,19 +1,27 @@
 import React from 'react';
 import clsx from 'clsx';
+
 import styles from './HomepageFeatures.module.css';
 
 const FeatureList = [
   {
-    title: 'Grammar extension',
+    title: '⚡️ Powerful grammar language',
     description: (
       <>
-        Object-oriented grammar extension makes it easy to extend an existing
-        language with new syntax.
+        <p>
+          Full support for left recursion lets you define left-associative
+          operators in a natural way.
+        </p>
+
+        <p>
+          Object-oriented grammar extension makes it easy to extend an existing
+          language with new syntax.
+        </p>
       </>
     ),
   },
   {
-    title: 'Modular semantic actions',
+    title: '📦 Modular semantic actions',
     description: (
       <>
         Unlike many similar tools, Ohm completely separates grammars from
@@ -23,12 +31,12 @@ const FeatureList = [
     ),
   },
   {
-    title: 'Online editor and visualizer',
+    title: '🦸 Online editor and visualizer',
     description: (
       <>
         The <a href="/editor">Ohm Editor</a> provides instant feedback and an
-        interactive visualization of the parse. It'll make you feel like you
-        have superpowers. 💪
+        interactive visualization makes the entire execution of the parser
+        visible and tangible. It'll make you feel like you have superpowers.
       </>
     ),
   },

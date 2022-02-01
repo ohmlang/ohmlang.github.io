@@ -1,5 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
+import Head from '@docusaurus/Head';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
@@ -27,10 +28,21 @@ function HomepageHeader() {
 
 export default function Home() {
   const {siteConfig} = useDocusaurusContext();
+  const {title, tagline} = siteConfig;
+
+  const description = [
+    'Ohm is a parsing toolkit for JavaScript, consisting of a library and a',
+    'domain-specific language. You can use it to parse custom file formats or',
+    'quickly build parsers, interpreters, and compilers for programming languages.'
+  ].join(' ');
+
   return (
     <Layout
-      title={`Hello from ${siteConfig.title}`}
-      description="Description will go into a meta tag in <head />">
+      title={title}
+      description={description}>
+        <Head>
+          <title>Ohm: a user-friendly parsing toolkit for JavaScript and Typescript</title>
+        </Head>
       <HomepageHeader />
       <main>
         <HomepageFeatures />

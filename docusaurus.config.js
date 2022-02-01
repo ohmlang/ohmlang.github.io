@@ -26,6 +26,7 @@ async function createConfig() {
         ({
           docs: {
             sidebarPath: require.resolve('./sidebars.js'),
+            sidebarCollapsible: false,
             // Please change this to your repo.
             editUrl: ({ docPath }) =>
               `https://github.com/harc/ohm/edit/master/doc/${docPath}`,

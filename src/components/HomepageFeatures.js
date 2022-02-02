@@ -1,5 +1,6 @@
-import React from 'react';
+import Link from '@docusaurus/Link';
 import clsx from 'clsx';
+import React from 'react';
 
 import styles from './HomepageFeatures.module.css';
 
@@ -23,21 +24,21 @@ const FeatureList = [
   {
     title: '📦 Modular semantic actions',
     description: (
-      <>
+      <p>
         Unlike many similar tools, Ohm completely separates grammars from
         semantic actions. This improves modularity and extensibility, and makes
         both grammars and semantic actions easier to read and understand.
-      </>
+      </p>
     ),
   },
   {
     title: '🦸 Online editor and visualizer',
     description: (
-      <>
-        The <a href="/editor">Ohm Editor</a> provides instant feedback and an
-        interactive visualization makes the entire execution of the parser
+      <p>
+        The <Link href="/editor">Ohm Editor</Link> provides instant feedback and
+        an interactive visualization makes the entire execution of the parser
         visible and tangible. It'll make you feel like you have superpowers.
-      </>
+      </p>
     ),
   },
 ];
@@ -47,7 +48,7 @@ function Feature({ title, description }) {
     <div className={clsx('col col--4')}>
       <div className="text--center padding-horiz--md">
         <h3>{title}</h3>
-        <p>{description}</p>
+        {description}
       </div>
     </div>
   );

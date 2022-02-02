@@ -1,5 +1,4 @@
 import Link from '@docusaurus/Link';
-import clsx from 'clsx';
 import React from 'react';
 
 import styles from './HomepageFeatures.module.css';
@@ -45,7 +44,7 @@ const FeatureList = [
 
 function Feature({ title, description }) {
   return (
-    <div className={clsx('col col--4')}>
+    <div className={'col col--4'}>
       <div className="text--center padding-horiz--md">
         <h3>{title}</h3>
         {description}

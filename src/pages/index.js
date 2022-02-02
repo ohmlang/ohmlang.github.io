@@ -46,12 +46,14 @@ export default function Home() {
     'quickly build parsers, interpreters, and compilers for programming languages.',
   ].join(' ');
 
+  const pageTitle =
+    'Ohm: a user-friendly parsing toolkit for JavaScript and Typescript';
   return (
     <Layout title={title} description={description}>
       <Head>
-        <title>
-          Ohm: a user-friendly parsing toolkit for JavaScript and Typescript
-        </title>
+        <title>{pageTitle}</title>
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={description} />
       </Head>
       <HomepageHeader />
       <main>

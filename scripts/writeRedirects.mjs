@@ -2,7 +2,7 @@
 
 import assert from 'assert';
 import dedent from 'tiny-dedent';
-import fs from 'fs';
+import fs, { rmSync } from 'fs';
 import path from 'path';
 
 /*
@@ -14,6 +14,13 @@ https://git.io/Jz4CI - https://github.com/harc/ohm/blob/master/doc/releases/ohm-
 https://git.io/JRwtG - https://github.com/harc/ohm/blob/master/doc/releases/ohm-js-16.0.md#default-semantic-actions
  */
 
+/*
+  Thoughts about short URLs:
+  - 3 chars should be enough for now
+  - Use mnemonic codes, but avoid collisions.
+  - /d/ is short for "docs". Maybe introduce /e/ or /err/ for errors in the future?
+ */
+
 // prettier-ignore
 const shortUrls = [
   ['/d/sc', '/docs/syntax-reference#special-characters'],
@@ -23,19 +30,20 @@ const shortUrls = [
   ['/d/dsa', '/docs/releases/ohm-js-16.0#default-semantic-actions'],
 ];
 
-function writeRedirect(src, dest) {
+function writeRedirect(srcDir, destUrl) {
+  fs.mkdirSync(srcDir);
   return fs.writeFileSync(
-    src,
+    path.join(srcDir, 'index.html'),
     dedent(`
       <!DOCTYPE html>
       <html>
         <head>
           <meta charset="UTF-8" />
-          <meta http-equiv="refresh" content="0; url=${dest}" />
-          <link rel="canonical" href="${dest}" />
+          <meta http-equiv="refresh" content="0; url=${destUrl}" />
+          <link rel="canonical" href="${destUrl}" />
         </head>
         <script>
-          window.location.href = '${dest}';
+          window.location.href = '${destUrl}';
         </script>
       </html>
     `),
@@ -46,9 +54,15 @@ function writeRedirect(src, dest) {
 fs.rmSync('static/d', { recursive: true });
 fs.mkdirSync('static/d');
 
+const redirectedUrls = new Set();
 for (const [src, dest] of shortUrls) {
   assert.equal(src[0], '/', '`src` should be an absolute path');
   assert.equal(dest[0], '/', '`dest` should be an absolute path');
+
+  // Make sure there are no duplicate short URLs.
+  assert.equal(redirectedUrls.has(src), false, `Duplicate redirect: ${src}`);
+  redirectedUrls.add(src);
+
   writeRedirect(path.join('static', src), dest);
   console.log(src, '->', dest);
 }

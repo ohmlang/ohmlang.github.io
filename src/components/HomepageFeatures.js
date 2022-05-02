@@ -34,9 +34,10 @@ const FeatureList = [
     title: '🦸 Online editor and visualizer',
     description: (
       <p>
-        The <Link href="https://ohmjs.org/editor">Ohm Editor</Link> provides instant feedback and
-        an interactive visualization makes the entire execution of the parser
-        visible and tangible. It'll make you feel like you have superpowers.
+        The <Link href="https://ohmjs.org/editor">Ohm Editor</Link> provides
+        instant feedback and an interactive visualization makes the entire
+        execution of the parser visible and tangible. It'll make you feel like
+        you have superpowers.
       </p>
     ),
   },

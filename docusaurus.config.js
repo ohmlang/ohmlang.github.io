@@ -36,7 +36,7 @@ async function createConfig() {
             sidebarCollapsible: false,
             // Please change this to your repo.
             editUrl: ({ docPath }) =>
-              `https://github.com/harc/ohm/edit/master/doc/${docPath}`,
+              `https://github.com/harc/ohm/edit/main/doc/${docPath}`,
             remarkPlugins: [remarkComment],
           },
           blog: false,

@@ -1,4 +1,5 @@
 #! /bin/bash
 
 cp -r ../ohm/doc/* docs
-node scripts/escapeMdx.mjs
+mv docs/images static/img/docs
+node scripts/escapeMdx.mjs docs/*

@@ -144,7 +144,7 @@ as well as multiline (`/* */`) comments like:
 
 ## Built-in Rules
 
-(See [built-in-rules.ohm](https://github.com/harc/ohm/blob/master/packages/ohm-js/src/built-in-rules.ohm).)
+(See [src/built-in-rules.ohm](https://github.com/harc/ohm/blob/main/packages/ohm-js/src/built-in-rules.ohm).)
 
 `any`: Matches the next character in the input stream, if one exists.
 
@@ -250,7 +250,7 @@ AddExp_plus = AddExp "+" MulExp
 
 <h3 id="syntactic-lexical">Syntactic vs. Lexical Rules</h3>
 
-<!-- https://git.io/JiYgP -->
+<!-- https://ohmjs.org/d/svl -->
 
 A _syntactic rule_ is a rule whose name begins with an uppercase letter, and _lexical rule_ is one whose name begins with a lowercase letter. The difference between lexical and syntactic rules is that syntactic rules implicitly skip whitespace characters.
 
@@ -258,7 +258,7 @@ The definition of "whitespace character" is anything that matches the grammar's 
 
 #### How space skipping works
 
-In the body of a syntactic rule, Ohm implicity inserts applications of the `spaces` rule before each expression. (The `spaces` rule is defined as `spaces = space*`.) As an example, take this fragment of JSON grammar:
+In the body of a syntactic rule, Ohm implicitly inserts applications of the `spaces` rule before each expression. (The `spaces` rule is defined as `spaces = space*`.) As an example, take this fragment of JSON grammar:
 
 <!-- @markscript
   let syntacticDefs;

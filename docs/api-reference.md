@@ -8,23 +8,11 @@ This page documents the API of Ohm/JS, a JavaScript library for working with gra
 
 <b><pre class="api">ohm.grammar(source: string, optNamespace?: object) &rarr; Grammar</pre></b>
 
-Instantiate the Grammar defined by `source`. If specified, `optNamespace` is the Namespace to use when resolving external references in the grammar. For more information, see the documentation on [Namespace objects](#namespace-objects) below.
+Instantiate the Grammar defined by `source`. If specified, `optNamespace` is an object in which references to other grammars should be resolved. For example, if the grammar source begins with an inheritance declaration like `MyGrammar <: OtherGrammar { ... }`, then `optNamespace` should have a property named `OtherGrammar`. 
 
-<b><pre class="api">ohm.grammars(source: string, optNamespace?: object) &rarr; Namespace</pre></b>
+<b><pre class="api">ohm.grammars(source: string, optNamespace?: object) &rarr; object</pre></b>
 
-Create a new Namespace containing Grammar instances for all of the grammars defined in `source`. If `optNamespace` is specified, it will be the prototype of the new Namespace.
-
-## Namespace objects
-
-When instantiating a grammar that refers to another grammar -- e.g. `MyJava <: Java { keyword += "async" }` -- the supergrammar name ('Java') is resolved to a grammar by looking up the name in a Namespace. In Ohm/JS, Namespaces are a plain old JavaScript objects, and an object literal like `{Java: myJavaGrammar}` can be passed to any API that expects a Namespace. For convenience, Ohm also has the following methods for working with namespaces:
-
-<b><pre class="api">ohm.namespace(optProps?: object)</pre></b>
-
-Create a new namespace. If `optProps` is specified, all of its properties will be copied to the new namespace.
-
-<b><pre class="api">ohm.extendNamespace(namespace: object, optProps?: object)</pre></b>
-
-Create a new namespace which inherits from `namespace`. If `optProps` is specified, all of its properties will be copied to the new namespace.
+Create a new object containing Grammar instances for all of the grammars defined in `source`. As with `ohm.grammar`, if `optNamespace` is specified, it is an object in which references to other grammars should be resolved. Additionally, it will be the prototype of the returned object.
 
 ## Grammar objects
 

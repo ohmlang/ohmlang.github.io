@@ -21,6 +21,14 @@ replacements.set('syntax-reference.md', [
   ['supergrammarName</i> { ... }', "supergrammarName</i> {'{'} ... {'}'}"],
 ]);
 
+// TODO: The intro is still manually cut and pasted from README.md. Fix this!
+replacements.set('intro.md', [
+  ['(doc/api-reference.md#instantiating-grammars)', '(api-reference.md#instantiating-grammars)'],
+  ['(./doc/api-reference.md#trace)', '(api-reference.md#trace)'],
+  ['[main documentation](doc/README.md)', '[API Reference](api-reference.md)'],
+  ['- [Documentation](doc/README.md)\n', ''],
+]);
+
 for (const filename of process.argv.slice(2)) {
   const basename = path.basename(filename);
   if (!replacements.has(basename)) continue;

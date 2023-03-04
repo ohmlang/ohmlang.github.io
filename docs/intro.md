@@ -2,7 +2,7 @@
 
 ## Getting Started
 
-The easiest way to get started with Ohm is to use the [interactive editor](https://ohmlang.github.io/editor/). Alternatively, you can play with one of the following examples on JSFiddle:
+The easiest way to get started with Ohm is to use the [interactive editor](https://ohmjs.org/editor/). Alternatively, you can play with one of the following examples on JSFiddle:
 
 - [Basic parsing example](https://jsfiddle.net/pdubroy/p3b1v2xb/)
 - [Arithmetic example with semantics](https://jsfiddle.net/pdubroy/15k63qae/)
@@ -10,8 +10,8 @@ The easiest way to get started with Ohm is to use the [interactive editor](https
 ## Resources
 
 - Tutorial: [Ohm: Parsing Made Easy](https://nextjournal.com/dubroy/ohm-parsing-made-easy)
-- The [math example](https://github.com/harc/ohm/blob/master/examples/math/index.html) is extensively commented and is a good way to dive deeper.
-- [Examples](https://github.com/harc/ohm/blob/master/examples)
+- The [math example](https://github.com/harc/ohm/tree/main/examples/math/index.html) is extensively commented and is a good way to dive deeper.
+- [Examples](https://github.com/harc/ohm/tree/main/examples/)
 - For community support and discussion, join us on [Discord](https://discord.gg/KwxY5gegRQ), [GitHub Discussions](https://github.com/harc/ohm/discussions), or the [ohm-discuss mailing list](https://groups.google.com/u/0/g/ohm-discuss).
 - For updates, follow [@\_ohmjs on Twitter](https://twitter.com/_ohmjs).
 
@@ -71,7 +71,7 @@ import ohm from 'https://unpkg.com/ohm-js@16/dist/ohm.esm.js';
 
 ### Defining Grammars
 
-![Instantiating a grammar](http://harc.github.io//ohm/doc/images/instantiating-grammars.png)
+![Instantiating a grammar](https://ohmjs.org/img/docs/instantiating-grammars.png)
 
 To use Ohm, you need a grammar that is written in the Ohm language. The grammar provides a formal
 definition of the language or data format that you want to parse. There are a few different ways
@@ -105,11 +105,11 @@ you can define an Ohm grammar:
   const myGrammar = ohm.grammar(contents);
   ```
 
-For more information, see [Instantiating Grammars](./api-reference.md#instantiating-grammars) in the API reference.
+For more information, see [Instantiating Grammars](api-reference.md#instantiating-grammars) in the API reference.
 
 ### Using Grammars
 
-![Matching input](http://harc.github.io/ohm/doc/images/matching.png)
+![Matching input](https://ohmjs.org/img/docs/matching.png)
 
 <!-- @markscript
   // The duplication here is required because Markscript only executes top-level code blocks.
@@ -131,15 +131,17 @@ if (m.succeeded()) {
 
 The result is a MatchResult object. You can use the `succeeded()` and `failed()` methods to see whether the input was recognized or not.
 
+For more information, see the [API Reference](api-reference.md).
+
 ## Debugging
 
 Ohm has two tools to help you debug grammars: a text trace, and a graphical visualizer.
 
-[![Ohm Visualizer](http://harc.github.io/ohm/doc/images/visualizer-small.png)](https://ohmlang.github.io/editor)
+[![Ohm Visualizer](https://ohmjs.org/img/docs/visualizer-small.png)](https://ohmjs.org/editor)
 
-You can [try the visualizer online](https://ohmlang.github.io/editor).
+You can [try the visualizer online](https://ohmjs.org/editor).
 
-To see the text trace for a grammar `g`, just use the [`g.trace()`](./api-reference.md#trace)
+To see the text trace for a grammar `g`, just use the [`g.trace()`](api-reference.md#trace)
 method instead of `g.match`. It takes the same arguments, but instead of returning a MatchResult
 object, it returns a Trace object — calling its `toString` method returns a string describing
 all of the decisions the parser made when trying to match the input. For example, here is the

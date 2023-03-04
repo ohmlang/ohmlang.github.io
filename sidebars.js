@@ -81,7 +81,7 @@ const sidebars = {
       items: [
         {
           type: 'doc',
-          label: 'v17.0',
+          label: 'v17.0 (Latest)',
           id: 'releases/ohm-js-17.0',
         },
         {

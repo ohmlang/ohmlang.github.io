@@ -8,7 +8,7 @@ This page documents the API of Ohm/JS, a JavaScript library for working with gra
 
 <b><pre class="api">ohm.grammar(source: string, optNamespace?: object) &rarr; Grammar</pre></b>
 
-Instantiate the Grammar defined by `source`. If specified, `optNamespace` is an object in which references to other grammars should be resolved. For example, if the grammar source begins with an inheritance declaration like `MyGrammar <: OtherGrammar { ... }`, then `optNamespace` should have a property named `OtherGrammar`. 
+Instantiate the Grammar defined by `source`. If specified, `optNamespace` is an object in which references to other grammars should be resolved. For example, if the grammar source begins with an inheritance declaration like `MyGrammar <: OtherGrammar { ... }`, then `optNamespace` should have a property named `OtherGrammar`.
 
 <b><pre class="api">ohm.grammars(source: string, optNamespace?: object) &rarr; object</pre></b>
 
@@ -196,7 +196,7 @@ The matching semantic action for a particular node is chosen as follows:
   );
 -->
 
-_**NOTE:** Versions of Ohm prior to v16.0 had slightly different behaviour with regards to default semantic actions. See [here](https://github.com/harc/ohm/blob/main/doc/releases/ohm-js-16.0.md#default-semantic-actions) for more details._
+_**NOTE:** Versions of Ohm prior to v16.0 had slightly different behaviour with regards to default semantic actions. See [here](./releases/ohm-js-16.0.md#default-semantic-actions) for more details._
 
 Note that you can also write semantic actions for built-in rules like `letter` or `digit`. For `ListOf`, please see the documentation on [asIteration](#asIteration) below.
 

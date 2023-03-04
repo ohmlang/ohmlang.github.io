@@ -23,14 +23,14 @@ To use Ohm in the browser, just add a single `<script>` tag to your page:
 
 ```html
 <!-- Development version of Ohm from unpkg.com -->
-<script src="https://unpkg.com/ohm-js@16/dist/ohm.js"></script>
+<script src="https://unpkg.com/ohm-js@17/dist/ohm.js"></script>
 ```
 
 or
 
 ```html
 <!-- Minified version, for faster page loads -->
-<script src="https://unpkg.com/ohm-js@16/dist/ohm.min.js"></script>
+<script src="https://unpkg.com/ohm-js@17/dist/ohm.min.js"></script>
 ```
 
 This creates a global variable named `ohm`.
@@ -53,10 +53,10 @@ Then, you can use `require` to use Ohm in a script:
 const ohm = require('ohm-js');
 ```
 
-As of v16.2.0, Ohm can also be imported as an ES module:
+Ohm can also be imported as an ES module:
 
 ```js
-import ohm from 'ohm-js';
+import * as ohm from 'ohm-js';
 ```
 
 ### Deno
@@ -64,7 +64,7 @@ import ohm from 'ohm-js';
 To use Ohm from [Deno](https://deno.land/):
 
 ```js
-import ohm from 'https://unpkg.com/ohm-js@16/dist/ohm.esm.js';
+import * as ohm from 'https://unpkg.com/ohm-js@17';
 ```
 
 ## Basics

@@ -1,41 +1,9 @@
-# Website
+# About
 
-This website is built using [Docusaurus 2](https://docusaurus.io/), a modern static website generator.
+This repo hosts the generated (post-build) assets for [ohmjs.org][] in the `gh-pages` branch. The source for the site is now at [ohmjs/ohmjs.org][].
 
-### Installation
+**NOTE**: Do NOT delete this repo! [ohmlang.github.io][] used to be the official Ohm site, and some published papers use that URL. As long as this repo is around, GitHub will 301 redirect to whatever is in the [CNAME file](https://github.com/ohmlang/ohmlang.github.io/blob/gh-pages/CNAME).
 
-```
-$ yarn
-```
-
-### Local Development
-
-```
-$ yarn start
-```
-
-This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
-
-### Build
-
-```
-$ yarn build
-```
-
-This command generates static content into the `build` directory and can be served using any static contents hosting service.
-
-### Deployment
-
-Using SSH:
-
-```
-$ USE_SSH=true yarn deploy
-```
-
-Not using SSH:
-
-```
-$ GIT_USER=<Your GitHub username> yarn deploy
-```
-
-If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.
+[ohmjs.org]: https://ohmjs.org
+[ohmjs/ohmjs.org]: https://github.com/ohmjs/ohm
+[ohmlang.github.io]: https://ohmlang.github.io

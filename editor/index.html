@@ -465,7 +465,13 @@
         flex-direction: row;
       }
     </style>
+    <link rel="stylesheet" href="style/ellipsis-dropdown.css" />
+    <link rel="stylesheet" href="style/example-list.css" />
     <link rel="stylesheet" href="style/parseTree.css" />
+    <link
+      rel="stylesheet"
+      href="third_party/css/bootstrap-dropdown-3.3.7.css"
+    />
   </head>
   <body>
     <div id="topSection">
@@ -478,14 +484,14 @@
             </select>
             <button class="outline-btn" id="saveGrammar">Save</button>
             <div id="grammarDropdown">
-              <!-- See components/ellipsis-dropdown.vue -->
+              <!-- See components/ellipsis-dropdown.js -->
             </div>
           </div>
         </div>
         <div class="flex-fix"><div class="editorWrapper"></div></div>
       </div>
       <div id="topSplitter" class="splitter vertical"></div>
-      <div id="exampleContainer"><!-- See components/example-list.vue --></div>
+      <div id="exampleContainer"><!-- See components/example-list.js --></div>
     </div>
 
     <div id="mainSplitter" class="splitter"></div>

@@ -7,3 +7,13 @@ This repo hosts the generated (post-build) assets for [ohmjs.org][] in the `gh-p
 [ohmjs.org]: https://ohmjs.org
 [ohmjs/ohmjs.org]: https://github.com/ohmjs/ohm
 [ohmlang.github.io]: https://ohmlang.github.io
+
+## Cloudflare SSL issues
+
+On 2025-01-29 the site was down to an an SSL issue. Here's what happened & how I fixed it:
+
+- I went to [Settings → Pages](https://github.com/ohmlang/ohmlang.github.io/settings/pages) for ohmlang.github.io and saw a Certificate Request Error:
+  ![CleanShot 2025-01-29 at 19 08 29@2x](https://github.com/user-attachments/assets/e979ded4-4755-46ec-b069-d6d1f4b63269)
+- On Cloudflare, under the site settings for ohmjs.org, I did _Pause Cloudflare_.
+- On GitHub, I removed the custom domain name, and then added it back.
+- I re-enabled the site on Cloudflare.

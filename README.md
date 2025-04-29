@@ -17,3 +17,5 @@ On 2025-01-29 the site was down to an an SSL issue. Here's what happened & how I
 - On Cloudflare, under the site settings for ohmjs.org, I did _Pause Cloudflare_.
 - On GitHub, I removed the custom domain name, and then added it back.
 - I re-enabled the site on Cloudflare.
+
+2025-04-29: Went down again. Did the same dance, except I _didn't_ re-enable Cloudflare.

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Incremental Packrat Parsing</title>
+    <link rel="stylesheet" href="third_party/github-markdown.css">
+    <style>
+    /* See https://github.com/sindresorhus/github-markdown-css */
+  	.markdown-body {
+  		box-sizing: border-box;
+  		min-width: 200px;
+  		max-width: 980px;
+  		margin: 0 auto;
+  		padding: 45px;
+  	}
+
+  	@media (max-width: 767px) {
+  		.markdown-body {
+  			padding: 15px;
+  		}
+  	}
+    </style>
+</head>
+<body>
+  <article class="markdown-body">
+    <!--
+      Generated from index.md via `echo "import markdown; print(markdown.markdown(open('index.md').read()))" | uv run --with markdown -`.
+      Then, wrapped in HTML boilerplate, as per https://github.com/sindresorhus/github-markdown-css.
+      -->
+    <h1>Incremental Packrat Parsing</h1>
+    <p>This site contains the artifacts and supporting materials for our paper
+    <a href="https://ohmjs.org/pubs/sle2017/incremental-packrat-parsing.pdf">Incremental Packrat Parsing</a> presented at <a href="https://conf.researchr.org/track/sle-2017/sle-2017-papers">SLE'17</a>:</p>
+    <blockquote>
+    <p>Packrat parsing is a popular technique for implementing top-down, unlimited-lookahead parsers that operate in guaranteed linear time. In this paper, we describe a method for turning a standard packrat parser into an <em>incremental parser</em> through a simple modification to its memoization strategy. By "incremental", we mean that the parser can perform syntax analysis without completely reparsing the input after each edit operation. This makes packrat parsing suitable for interactive use in code editors and IDEs — even with large inputs. Our experiments show that with our technique, an incremental packrat parser for JavaScript can outperform even a hand-optimized, non-incremental parser.</p>
+    </blockquote>
+    <h2>Links</h2>
+    <ul>
+    <li>Try the <a href="memo-viz.html">online visualization</a> as mentioned in Section 3</li>
+    <li>Source code for the ES5 parsers described in Section 4:</li>
+    <li><a href="https://github.com/ohmjs/sle17/blob/master/src/standard.js">src/standard.js</a>: the classes for a standard (non-incremental) packrat parser</li>
+    <li><a href="https://github.com/ohmjs/sle17/blob/master/src/incremental.js">src/incremental.js</a>: additional classes for implementing an incremental parser as described in the paper</li>
+    <li><a href="https://github.com/ohmjs/sle17/blob/master/src/es5.js">src/es5.js</a>: ES5 grammar, which can be instantiated into either a standard or incremental parser</li>
+    <li><a href="https://github.com/ohmjs/sle17">Git repository</a> with complete artifacts, including benchmark scripts, etc.</li>
+    <li><a href="https://ohmjs.org">Ohm</a> is our open-source packrat parsing framework, which supports incremental parsing as described in the paper</li>
+    </ul>
+  </article>
+</body>
+</html>

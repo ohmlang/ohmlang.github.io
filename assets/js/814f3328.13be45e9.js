@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkohmjs_org=self.webpackChunkohmjs_org||[]).push([[535],{5641:function(e){e.exports=JSON.parse('{"title":"Recent posts","items":[{"title":"Ohm v18 Beta","permalink":"/blog/ohm-v18"}]}')}}]);

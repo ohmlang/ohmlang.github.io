@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkohmjs_org=self.webpackChunkohmjs_org||[]).push([[535],{5641:function(e){e.exports=JSON.parse('{"title":"Recent posts","items":[{"title":"Inside Ohm\'s PEG-to-Wasm compiler","permalink":"/blog/2026/03/12/peg-to-wasm"},{"title":"Ohm v18 Beta","permalink":"/blog/ohm-v18"}]}')}}]);

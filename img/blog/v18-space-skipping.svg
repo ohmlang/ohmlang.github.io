@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 280" style="width:100%;max-width:560px;" font-family="system-ui,-apple-system,sans-serif">
+
+  <!-- legend -->
+  <rect x="20" y="10" width="10" height="10" rx="2" fill="#378ADD"/>
+  <text x="34" y="20" font-size="12" fill="#777">Before</text>
+  <rect x="88" y="10" width="10" height="10" rx="2" fill="#1D9E75"/>
+  <text x="102" y="20" font-size="12" fill="#777">After</text>
+
+  <!-- panel divider -->
+  <line x1="280" y1="5" x2="280" y2="270" stroke="#e8e8e8" stroke-width="1"/>
+
+  <!-- ── Panel 1: Parse time ── -->
+  <text x="140" y="48" text-anchor="middle" font-size="13" font-weight="500" fill="#333">Parse time</text>
+  <text x="140" y="63" text-anchor="middle" font-size="11" fill="#aaa">lower is better</text>
+
+  <!-- Before bar: 79.1ms → 130px tall, top at y=100 -->
+  <text x="110" y="96" text-anchor="middle" font-size="12" font-weight="500" fill="#378ADD">79.1 ms</text>
+  <rect x="88" y="100" width="44" height="130" rx="3" fill="#378ADD"/>
+
+  <!-- After bar: 55.8ms → 92px tall, top at y=138 -->
+  <text x="165" y="134" text-anchor="middle" font-size="12" font-weight="500" fill="#1D9E75">55.8 ms</text>
+  <rect x="143" y="138" width="44" height="92" rx="3" fill="#1D9E75"/>
+
+  <line x1="72" y1="230" x2="215" y2="230" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="110" y="244" text-anchor="middle" font-size="11" fill="#bbb">Before</text>
+  <text x="165" y="244" text-anchor="middle" font-size="11" fill="#bbb">After</text>
+
+  <rect x="100" y="254" width="80" height="18" rx="4" fill="#E1F5EE"/>
+  <text x="140" y="267" text-anchor="middle" font-size="11" font-weight="500" fill="#0F6E56">−29% faster</text>
+
+  <!-- ── Panel 2: Memory ── -->
+  <text x="420" y="48" text-anchor="middle" font-size="13" font-weight="500" fill="#333">Memory usage</text>
+  <text x="420" y="63" text-anchor="middle" font-size="11" fill="#aaa">lower is better</text>
+
+  <!-- Before bar: 174MB → 135px tall, top at y=95 -->
+  <text x="390" y="91" text-anchor="middle" font-size="12" font-weight="500" fill="#378ADD">174 MB</text>
+  <rect x="368" y="95" width="44" height="135" rx="3" fill="#378ADD"/>
+
+  <!-- After bar: 87MB → 68px tall, top at y=162 -->
+  <text x="445" y="158" text-anchor="middle" font-size="12" font-weight="500" fill="#1D9E75">87 MB</text>
+  <rect x="423" y="162" width="44" height="68" rx="3" fill="#1D9E75"/>
+
+  <line x1="352" y1="230" x2="495" y2="230" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="390" y="244" text-anchor="middle" font-size="11" fill="#bbb">Before</text>
+  <text x="445" y="244" text-anchor="middle" font-size="11" fill="#bbb">After</text>
+
+  <rect x="380" y="254" width="80" height="18" rx="4" fill="#E1F5EE"/>
+  <text x="420" y="267" text-anchor="middle" font-size="11" font-weight="500" fill="#0F6E56">−50% memory</text>
+
+</svg>
